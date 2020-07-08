@@ -1,0 +1,116 @@
+/*GERAL*/
+*{margin:0;padding:0;}
+.stretch{width:100%; height:100%;}
+
+/*STICK*/
+html, body {height:100%;}
+header {flex-shrink: 0;}
+.container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;    
+}
+.body{
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 2em;
+    text-align: center;
+}
+
+/* Posicionamento de todos os dialogs*/
+.ui-dialog{position: fixed;} 
+
+/* Definicao de estilos de posicionamentos gerais*/
+.top{vertical-align: top;}
+.middle{vertical-align: middle;}
+.bottom{vertical-align: bottom;}
+.right{text-align: right;}
+.left{text-align: left;}
+.center{text-align:center;}
+.top10{width: 10%;vertical-align: top;}
+.top15{width: 15%;vertical-align: top;}
+.top20{width: 20%;vertical-align: top;}
+.top25{width: 25%;vertical-align: top;}
+.top30{width: 30%;vertical-align: top;}
+.top40{width: 40%;vertical-align: top;}
+.top45{width: 45%;vertical-align: top;}
+.top50{width: 50%;vertical-align: top;}
+.top55{width: 55%;vertical-align: top;}
+.top60{width: 60%;vertical-align: top;}
+.top70{width: 70%;vertical-align: top;}
+.top75{width: 75%;vertical-align: top;}
+.top80{width: 80%;vertical-align: top;}
+.top85{width: 85%;vertical-align: top;}
+.top90{width: 90%;vertical-align: top;}
+.leftTextHeader{text-align: left;width:100%;}
+.rightBtnHeader{text-align: right;width:16px;}
+.rightStatusHeader{text-align: right;padding-right:10px;}
+
+/* Para o paginador*/
+.paginatorColumn1{text-align:left;	width:40px;	border:none !important;}
+.paginatorColumn2{text-align:center; border:none !important;}
+/* Retira o sublinhado de links e links decorativos*/
+.no_sel {font-size: 13px;text-decoration: none;}
+.sel_link {font-size: 13px;	text-decoration: none;cursor: pointer;}
+.sel_link_p {font-size: 13px;	text-decoration: none;cursor: pointer; 
+		background-color: orange}
+.sel_link:HOVER {background-color:black!important;	color: white !important;}
+.sel_link:ACTIVE {background-color:black;	color: yellow !important;}
+
+/* Para imagens de links*/
+.imgButton{width:18px !important;height:18px !important;border:none !important;}
+
+/*Definicao para label, input e outputText genericos*/
+.inoutput{font-family: verdana, arial, sans-serif;font-size: 13px;}
+
+/* Definicoes de estilos para colunas zebradas (JSF) */
+.primeiro {text-align: left;font: 13px Arial, sans-serif;background: #5F9EA0;} 
+.ultimo {text-align: left;font: 13px Arial, sans-serif; background: #B0C4DE;}
+
+/* 13 pixels generico para controles*/
+.font_13px{
+	font-size: 13px;
+}
+
+/* Definicao global para fontes de componentes do primeFaces*/
+.ui-widget,.ui-widget .ui-widget{
+	font-size: 13px !important;
+}
+
+/* Layouts do primeFaces*/
+.ui-dialog-title, .ui-panel .ui-panel-titlebar .ui-panel-title{
+	text-shadow: 1px 0px 0px red,-1px 0px 0px red,0px 1px 0px red,0px -1px 0px red;
+ 	font-size: 130%;
+	font-weight: bold;
+	color: white;
+	font-family: verdana, arial, sans-serif;	
+	float: left !important 
+}
+
+/* titulos */
+.page-title, .ui-panel .ui-panel-titlebar .ui-panel-title{
+	text-shadow: 1px 0px 0px red,-1px 0px 0px red,0px 1px 0px red,0px -1px 0px red;
+ 	font-size: 160%;
+	font-weight: bold;
+	color: white;
+	font-family: verdana, arial, sans-serif;			
+}
+
+/* dataTable zebrada (PRIMEFACES) - use assim:
+   rowStyleClass="#{empty index or index mod 2 ne 0 ? 'just-row' : 'further-row'}" */
+.just-row{
+	background-image:url("#{resource['images:skin/ui-just-row.png']}") !important;
+	background-size: 100% 100%  !important;	color:black !important;
+}
+.further-row{
+	background-image:url("#{resource['images:skin/ui-further-row.png']}") !important;
+	background-size: 100% 100%  !important;	color:black !important;
+}
+
+/*Estilo para menus customizados*/
+.customMenu .ui-widget-content{
+	width:190px !important; border-spacing:0px !important; 
+	overflow:visible !important;
+}

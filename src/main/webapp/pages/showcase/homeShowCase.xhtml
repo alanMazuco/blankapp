@@ -1,0 +1,207 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+    
+    <ui:param name="pageTitle" value="Tutorial JavaServer Faces com PrimeFaces, CDI e WildFly"/>
+    
+    <ui:define name="content">
+              
+		<h:form id="formShowCase"  styleClass="inoutput">			
+			<div align="center" style="margin-left:10px;" class="inoutput">
+				<h:panelGrid style="text-align:left;">															
+					<h:outputText value="MÓDULO 1 - AMBIENTAÇÃO" style="color:red;"/>
+					<h:panelGrid cellpadding="0" cellspacing="0">
+						<h:panelGrid   style="margin-right:10px;color:gray;" 
+							cellpadding="0" cellspacing="0">
+							<h:outputText value="Lição &#160;&#160;1: Apresentando o Eclipse"/>
+							<h:outputText value="Lição &#160;&#160;2: Web: Primeiros Passos"/>
+							
+							<h:outputText value="Lição &#160;&#160;3: 
+								Configurando o Eclipse para Projetos Web"/>
+							
+							<h:outputText value="Lição &#160;&#160;4: Noções de Servlets"/>
+							<h:outputText value="Lição &#160;&#160;5: Hello JSF"/>
+							<h:outputText value="Lição &#160;&#160;6: Facelets"/>
+							<h:outputText value="Lição &#160;&#160;7: Por dentro do JSF"/>						
+							<h:outputText value="Lição &#160;&#160;8: Ciclo de Vida do JSF"/>
+							<h:outputText value="Lição &#160;&#160;9: primefaces: Primeiros Passos"/>
+													
+							<h:panelGroup>
+								<h:outputText value="Lição 10:" style="color:gray;"/>
+								<h:commandLink value="Internacionalização" styleClass="sel_link" 
+									action="/pages/showcase/locales/listaLocales" 
+									style="color:#CD6600;"/>						
+							</h:panelGroup>
+							
+							<h:outputText value="Lição 11: Noções Básicas de CDI"/>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 12:&#160;" style="color:gray;"/>
+								<h:commandLink value="Criando um Componente de Mensagens" 
+									styleClass="sel_link" 
+									action="/pages/showcase/primefaces/msgPrimeFaces" 
+									style="color:#CD6600;"/>												
+							</h:panelGroup>
+							
+							<h:outputText value="Lição 13: Tratamento de Erros HTTP"/>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 14:&#160;" style="color:gray;"/>
+								<p:commandLink value="Criando um Componente Progressbar" 
+									style="color:#CD6600;"
+									styleClass="sel_link" 
+									action="#{progressbarCaseBean.testarProgressbar}" 
+									onclick="PF('progressbar').show()"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 15:&#160;" style="color:gray;"/>
+								<p:commandLink ajax="false" value="Themes" style="color:#CD6600;"
+									styleClass="sel_link" action="/pages/showcase/primefaces/themes"/>
+							</h:panelGroup>
+													
+							<h:panelGroup>
+								<h:outputText value="Lição 16:&#160;" style="color:gray;"/>
+								<p:commandLink value="Simples CRUD"
+									styleClass="sel_link" style="color:#CD6600;"
+									action="#{crudCaseBean.listarVeiculos}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 17:&#160;" style="color:gray;"/>
+								<p:commandLink value="Implementação de Logs" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="#{messageCaseBean.testarLogs}"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 18:&#160;" style="color:gray;"/>
+								<p:commandLink value="Validação e Conversão na Prática" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="/pages/showcase/primefaces/valueTest?faces-redirect=true"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 19:&#160;" style="color:gray;"/>
+								<p:commandLink value="Criando um Componente Upload" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="/pages/showcase/primefaces/uploadTest?faces-redirect=true"/>
+							</h:panelGroup>
+						</h:panelGrid>
+					</h:panelGrid>
+					<br/>
+					
+					<h:outputText value="MÓDULO 2 - MODELAGEM" style="color:red;"/>			
+					<h:panelGrid cellpadding="0" cellspacing="0">
+						<h:panelGrid  style="margin-right:10px;color:gray;" 
+							cellpadding="0" cellspacing="0">
+							<h:outputText value="Lição 20: O PostgreSQL"/>
+							<h:outputText value="Lição 21: O Padrão MVC"/>
+							<h:outputText value="Lição 22:  Um pouco de EJB, JPA e Hibernate"/>
+							<h:outputText value="Lição 23: DAO"/>
+							<h:outputText value="Lição 24: Facade / EJB Session Beans"/>
+							<h:outputText value="Lição 25: De volta ao BlankApp"/>
+							<h:outputText value="Lição 26: Trasações"/>
+							<h:outputText value="Lição 27: Introdução ao Mapeamento de Entidades"/>
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 28:&#160;" style="color:gray;"/>
+								<p:commandLink value="Mapeamento Self Relation" 
+									styleClass="sel_link" style="color:#CD6600;" 
+									onclick="PF('dlgSelfRelation').show()"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>	
+								<h:outputText value="Lição 29:&#160;" style="color:gray;"/>	
+								<p:commandLink value="Mapeamento One To One" 
+									styleClass="sel_link" style="color:#CD6600;" 
+									onclick="PF('dlgOneToOne').show()"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>	
+								<h:outputText value="Lição 30:&#160;" style="color:gray;"/>	
+								<p:commandLink value="Mapeamento One To Many / Many To One" 
+									styleClass="sel_link" style="color:#CD6600;" 
+									onclick="PF('dlgOneToMany').show()"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>	
+								<h:outputText value="Lição 31:&#160;" style="color:gray;"/>	
+								<p:commandLink value="Mapeamento Many To Many" 
+									styleClass="sel_link" style="color:#CD6600;" 
+									onclick="PF('dlgManyToMany').show()"/>
+							</h:panelGroup>
+							
+							<h:panelGroup>	
+								<h:outputText value="Lição 32:&#160;" style="color:gray;"/>	
+								<p:commandLink value="Listar tudo com FETCH" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="#{manyToManyCaseBean.listarTudoComFetch}" 
+			    		     		onclick="PF('dlgLoader').show()"  
+			    		     		oncomplete="PF('dlgLoader').hide()"/>
+							</h:panelGroup>	
+							
+							<h:panelGroup>
+								<h:outputText value="Lição 33:&#160;" style="color:gray;"/>
+								<p:commandLink value="Enviando email" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="#{emailCaseBean.sendEmail}"/>
+							</h:panelGroup>								
+							<h:outputText value="Lição 34: Empacotando o Framework"/>						
+						</h:panelGrid>
+					</h:panelGrid>				
+					<br/>
+					
+					<h:outputText value="MÓDULO 3 - APLICATIVO" style="color:red;"/>			
+					<h:panelGrid cellpadding="0" cellspacing="0">
+						<h:panelGrid style="margin-right:10px;color:gray;" 
+							cellpadding="0" cellspacing="0">
+							<h:outputText value="Lição 35: Setup - Primeira Parte"/>
+							<h:panelGroup>	
+								<h:outputText value="Lição 36:&#160;" style="color:gray;"/>	
+								<p:commandLink value="Setup - Segunda Parte" 
+									styleClass="sel_link" style="color:#CD6600;"
+									action="#{setupCaseBean.prepararSetup}"/>
+							</h:panelGroup>
+							<h:outputText value="Lição 37: UC Realizar Login"/>
+							<h:outputText value="Lição 38: UC Trocar a Senha"/>
+							<h:outputText value="Lição 39: UC Lembrar a Senha"/>
+							<h:outputText value="Lição 40: UC Cadastrar Visitante"/>
+							<h:outputText value="Lição 41: UC Manter Menus"/>
+							<h:outputText value="Lição 42: UC Manter Perfis de Acesso"/>
+							<h:outputText value="Lição 43: UC Manter o Cadastro de Pessoas"/>
+							<h:outputText value="Lição 44: UC Manter o Cadastro de Usuários"/>
+							<h:panelGroup>	
+								<h:outputText value="Lição 45:&#160;" style="color:gray;"/>	
+								<p:commandLink value="UC Manter Arquivos" 
+									styleClass="sel_link" style="color:#CD6600;"															
+									action="#{manterArquivosBean.iniciarManterArquivos}"/>
+							</h:panelGroup>							
+						</h:panelGrid>
+					</h:panelGrid>	
+					<br/>													
+				</h:panelGrid>					
+			</div>
+			<br/>
+			
+			<p:commandButton icon="pi pi-home" action="/pages/home/homePage?faces-redirect=true"/>
+			<br/><br/>			
+		</h:form>	
+				
+		<!-- Utilize a progressBar na pagina por fora de qualquer form -->
+		<a:progressbar widgetVar="progressbar"/>
+		
+		
+		<!--
+		<ui:include src="/pages/showcase/mapeamentos/dlgSelfRelation.xhtml" />		
+		<ui:include src="/pages/showcase/mapeamentos/dlgOneToOne.xhtml"/>
+		<ui:include src="/pages/showcase/mapeamentos/dlgOneToMany.xhtml"/>
+		<ui:include src="/pages/showcase/mapeamentos/dlgManyToMany.xhtml"/>
+		 -->
+			
+	</ui:define>
+</ui:composition>								

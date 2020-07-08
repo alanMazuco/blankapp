@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+	<cc:interface> </cc:interface>
+      
+	<cc:implementation>		
+		<h:panelGrid columns="2" cellpadding="0" cellspacing="0">			
+			<p:spacer height="16"/>					
+			<p:ajaxStatus id="status">				
+				<f:facet name="start">
+					<p:graphicImage value="#{resource['images:skin/status.gif']}"/>
+				</f:facet>
+				<f:facet name="complete">
+					<p:spacer height="16"/>
+				</f:facet>			
+			</p:ajaxStatus>
+		</h:panelGrid>		 		
+	</cc:implementation>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">	
+	
+	<cc:interface >
+		<cc:attribute name="bean"/>
+		<cc:attribute name="sizeLimit" type="java.lang.Integer"/>
+		<cc:attribute name="allowTypes" required="true" type="java.lang.String"/>
+		<cc:attribute name="update"  type="java.lang.String"/>		
+		<cc:attribute name="label" type="java.lang.String"/>
+	 	<cc:attribute name="invalidFileMessage" type="java.lang.String"/>
+		<cc:attribute name="invalidSizeMessage" type="java.lang.String"/>    	
+	</cc:interface>
+	
+	<cc:implementation>							
+		<p:dialog
+			id="upload" appendTo="@(body)"  
+			widgetVar="dlgUpload" 
+			dynamic = "true"
+			width="900"
+			height="280" 
+			resizable="false" 
+			modal="true"		
+			header="UPLOAD">						
+			
+			<h:form  id="formUpload">	
+				<p:outputPanel>	
+					<p:autoUpdate/>	
+					<p:fileUpload 
+						oncomplete="PF('dlgUpload').hide();"		
+				    	update="#{cc.attrs.update}" 
+				    	label="#{cc.attrs.label}" 
+			    		invalidFileMessage="#{cc.attrs.invalidFileMessage}" 
+			    		invalidSizeMessage="#{cc.attrs.invalidSizeMessage}" 
+			    		sizeLimit="#{cc.attrs.sizeLimit}"
+			    		allowTypes="#{cc.attrs.bean.allowTypes}"    		
+				    	mode="advanced" 
+						auto="false"
+			 			multiple="#{cc.attrs.bean.upload.multiplo}"	           
+						value="#{cc.attrs.bean.upload.file}"
+						listener="#{cc.attrs.bean.upload.upload}"/>
+		    	</p:outputPanel>
+			</h:form>		            	            	    
+		</p:dialog>
+	</cc:implementation>	
+</html>

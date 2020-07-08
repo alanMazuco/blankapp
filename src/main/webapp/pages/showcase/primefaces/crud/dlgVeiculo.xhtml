@@ -1,0 +1,52 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+
+	<p:dialog widgetVar="dlgVeiculo"
+		header="FORMULÁRIO DE INCLUSÃO DE VEÍCULOS" modal="true"
+		hideEffect="explode" resizable="false" appendTo="@(body)" closeOnEscape="true">
+
+		<h:form id="formVeiculo">
+			<p:panel id="panel">
+				<p:focus context="panel" />
+				<h:panelGrid style="text-align:left;" columns="2">
+					<h:outputLabel value="Marca:" />
+					<p:inputText label="Marca" value="#{crudCaseBean.veiculo.marca}"
+						required="true" />
+
+					<h:outputLabel value="Modelo:" />
+					<p:inputText label="Modelo" value="#{crudCaseBean.veiculo.modelo}"
+						required="true" />
+
+					<h:outputLabel value="Cor:" />
+					<p:inputText label="Cor" value="#{crudCaseBean.veiculo.cor}"
+						required="true" />
+
+					<h:outputLabel value="Ano:" />
+					<p:inputText label="Ano" maxlength="4" size="4"
+						value="#{crudCaseBean.veiculo.ano}" required="true" />
+				</h:panelGrid>
+
+				<f:facet name="footer">
+					<div align="right">
+						<h:panelGrid columns="4">
+							<a:status />
+
+							<p:commandButton icon="pi pi-save" title="Salvar"
+								styleClass="imgButton" action="#{crudCaseBean.salvarVeiculo}" />
+
+							<p:spacer width="2" />
+
+							<p:commandButton icon="pi pi-times" styleClass="imgButton"
+								immediate="true" title="Cancelar"
+								onclick="PF('dlgVeiculo').hide()" />
+						</h:panelGrid>
+					</div>
+				</f:facet>
+			</p:panel>
+		</h:form>
+	</p:dialog>
+</ui:fragment>

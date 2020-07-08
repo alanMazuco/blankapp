@@ -1,0 +1,85 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+	<table style="width:100%;border-collapse:collapse;border:0px;margin:0px;height:100px;">
+		<tr>
+			<h:panelGroup rendered="#{configBean.config.skinAnimatedTop=='F'?'true':'false'}">
+				<td valign="top" height="100" width="70%">			
+					<h:graphicImage  width="100%" height="100" style="margin-top:-3px;"
+						value="/resources/images/skin/#{configBean.config.skinBackground}/topo_left.png"/>
+					
+					<div style="margin-top:-125px;width:300px;" class="center" >
+						<h:graphicImage style="margin-top:30px;margin-left:20px;"
+							height="65" value="/resources/logos/#{configBean.config.skinImageLogo}"
+							rendered="#{configBean.config.skinLogo == 'T'}"/>
+																		
+						<h:panelGrid cellpadding="0" cellspacing="0" 
+							style="margin-top:-3px;margin-left:20px;" 
+							rendered="#{configBean.config.skinLogo == 'T'}">
+
+							<h:outputText		
+								value="#{configBean.config.skinTextLogo}"
+								style="font-family: verdana, arial, sans-serif;
+								font-size: 14px; font-weight:bold;
+								color:##{configBean.config.skinColorTextLogo};"/>
+						</h:panelGrid>	
+					</div>	
+				</td>		
+					
+				<td valign="top" height="100" width="30%" >
+					<h:graphicImage width="100%" height="100" style="margin-top:-4px;"
+					 value="/resources/images/skin/#{configBean.config.skinBackground}/topo_right.png"/>
+				</td>
+			</h:panelGroup>
+			
+			<h:panelGroup rendered="#{configBean.config.skinAnimatedTop== 'T' ? 'true' : 'false'}">
+				<td valign="top" height="100"></td>
+			</h:panelGroup>								
+			
+			<h:panelGroup id="id_html5" 
+				rendered="#{configBean.config.skinAnimatedTop=='T'?'true':'false'}"
+				style="width:100%;position:absolute;">	
+			
+				<div class="center">		
+					<ui:include src="/resources/animatedHtmls/#{configBean.config.skinAnimatedHtml}"/>	
+				</div>
+			</h:panelGroup>				
+		</tr>		
+
+		<tr>
+			<h:panelGroup>
+				<td></td>			
+				<td>
+					<div align="right">															
+						<h:form>
+							<div style="width:#{(configBean.locales.size() * 25)}px;margin-right:30px;margin-top:-38px;">													
+								<ui:repeat value="#{configBean.locales}" var="locale">			
+									<p:commandLink immediate="true"  style="border:none;text-decoration:none;" 
+											action="#{userSessionInBean.mudarIdioma}"  title="#{locale}"  ajax="false">
+											<f:param name="locale" value="#{locale}"/>										
+											<h:graphicImage style="border:none;" value="/resources/images/skin/#{locale}.gif"/>	
+									</p:commandLink>									
+									<h:outputLabel value= " "/>
+								</ui:repeat>								
+								</div>
+												
+								<!-- ***************************************************
+												colocar daqui para baixo:
+												- div contendo o valor da environment
+												- div contendo a versao do sistema e usuario logado
+												*************************************************** -->														
+												
+								<!-- **********************************************************
+												fim das divs contendo environment, versao e usuario logado 
+												**********************************************************-->										
+						</h:form>															
+					</div>					
+				</td>
+			</h:panelGroup>			
+		</tr>				
+
+	</table>		
+</ui:fragment>

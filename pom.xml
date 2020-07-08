@@ -1,0 +1,123 @@
+<project
+	xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+		https://maven.apache.org/xsd/maven-4.0.0.xsd">
+		
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>br.eti.amazu</groupId>
+	<artifactId>blankapp</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>war</packaging>
+	<name>BlankApp</name>
+	<description>Tutorial JavaServer Faces com PrimeFaces, CDI e WildFly</description>
+	
+	<properties>
+		<project.build.sourceEncoding>ISO-8859-1</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+	
+	<repositories>
+		<repository>
+			<id>amazu-repo</id>
+			<url>http://amazu.eti.br/maven/repo</url>
+			<releases>
+				<checksumPolicy>warn</checksumPolicy>
+				<enabled>true</enabled>
+				<updatePolicy>always</updatePolicy>
+			</releases>
+		</repository>
+	</repositories>
+		
+	<build>
+		<pluginManagement>
+		
+			<!--plugins compiladores da versao 3.8.1 do Maven e JSE 8-->
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.1</version>
+					
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+				
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>3.2.3</version>
+					
+					<configuration>
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<warName>blankapp</warName>
+					</configuration>
+				</plugin>
+				<!--fim de plugins compiladores da vers 3.8.1 do Maven e JSE 8-->
+				
+			</plugins>
+		</pluginManagement>
+	
+		<outputDirectory>
+			${basedir}/src/main/webapp/WEB-INF/classes
+		</outputDirectory>
+	</build>
+	
+	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/javax.servlet/javax.servlet-api -->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>javax.servlet-api</artifactId>
+			<version>4.0.1</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-jsf</artifactId>
+			<version>19.0.0.Final</version>
+			<scope>provided</scope>
+		</dependency>
+		
+		<dependency>  
+	    	<groupId>org.primefaces</groupId>  
+	    	<artifactId>primefaces</artifactId>  
+	    	<version>8.0</version>  
+		</dependency>	
+		
+		<dependency>
+			<groupId>org.omnifaces</groupId>
+			<artifactId>omnifaces</artifactId>
+			<version>3.6</version>
+		</dependency>	
+		
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.17</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>2.6</version>
+		</dependency>	
+		
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+			<version>1.14</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>1.18.12</version>
+			<scope>provided</scope>
+		</dependency>
+		
+	</dependencies>
+</project>

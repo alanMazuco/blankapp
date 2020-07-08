@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"    
+	xmlns:h="http://java.sun.com/jsf/html"
+ 	xmlns:f="http://java.sun.com/jsf/core"    
+ 	xmlns:p="http://primefaces.org/ui">
+    
+	<cc:interface></cc:interface>
+      
+	<cc:implementation>	
+		<h:form id="formDialog">		
+			<p:hotkey bind="return" oncomplete="PF('dlg').hide()" 
+				action="#{dialogBean.actionOkYes}" 
+				update="#{dialogBean.update}" 
+				onstart="$(function(){PrimeFaces.focus(null);});"/>
+
+			<div>
+				<p:outputPanel id="dialog">				
+					<p:autoUpdate />				
+					<p:dialog  
+						modal="true" widgetVar="dlg" header="#{dialogBean.header}" width="450"	
+						closable="#{dialogBean.closable}"
+						resizable="false" style="-webkit-user-select: none;cursor:pointer;">
+						
+						<p:panel style="width:200px;text-align:center;" 
+							rendered="#{dialogBean.confirmWarn == true?'true':'false'}">
+					   <h:outputText value="#{msg.CGL165}"
+					     style="color:red;font-weight:bold;text-align:center;font-size:15px !important;"/>
+					     <p:effect type="shake" event="load" />
+					 </p:panel>
+							
+						<div style="text-align:left">		
+							<p:messages/>
+						</div>
+						
+						<p:outputPanel id="gridLista">
+							<div style="text-align:center">
+								<div style="text-align:left;">									
+									<p:scrollPanel mode="native" rendered="#{not empty dialogBean.lista}" 
+										style="padding:5px 5px 5px 5px;
+											height:#{dialogBean.lista.size()>7?'97px':''};width:414px;">
+										<ui:repeat value="#{dialogBean.lista}" var="lista" >				       	
+											<h:outputText value="#{lista}"/> <br/>   	 	
+										</ui:repeat>
+									</p:scrollPanel>											    	
+								</div><br/>		
+													    						    			    	
+								<div>				    			    				    	
+								 <p:commandButton id="btnOkYes" widgetVar="btnOkYes"  onclick="PF('dlg').hide()"
+									action="#{dialogBean.actionOkYes}" ajax="#{dialogBean.ajax}" 
+									value="OK" update="#{dialogBean.update}"/>									    		
+								</div>
+
+							</div>				    					    	
+						</p:outputPanel>					
+						<p:spacer height="10"/>
+					</p:dialog>
+					
+					<p:dialog  modal="false" widgetVar="dlgGrowl"  width="450" 
+						style="background-color:#FFFFCC" resizable="false" 
+						position="20,140" header="...">	 
+						
+						<p:outputPanel id="gridLista1">
+							<div style="text-align:left">
+								<p:messages/>
+
+								<div style="text-align:left;">
+									<p:scrollPanel mode="native" rendered="#{not empty dialogBean.lista}" 
+										style="padding:5px 5px 5px 5px;
+											height:#{dialogBean.lista.size()>7?'97px':''};width:414px;">
+										<ui:repeat value="#{dialogBean.lista}" var="lista" >				       	
+											<h:outputText value="#{lista}"/> <br/>   	 	
+										</ui:repeat>
+									</p:scrollPanel>		    	
+								</div><br/>		
+													    						    			    	
+								<div style="text-align:center;">				    			    				    	
+									<p:commandButton  onclick="PF('dlgGrowl').hide()"
+										action="#{dialogBean.actionOkYes}" ajax="#{dialogBean.ajax}" 
+										value="OK" update="#{dialogBean.update}"/>
+								</div>
+
+							</div>				    					    	
+						</p:outputPanel>					
+						<p:spacer height="10"/>						
+					</p:dialog>			
+				</p:outputPanel>	
+			</div>
+		</h:form>	
+	</cc:implementation>	
+</html>

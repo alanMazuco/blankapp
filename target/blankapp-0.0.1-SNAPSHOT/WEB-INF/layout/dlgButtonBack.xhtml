@@ -1,0 +1,29 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui" > 
+
+	<p:dialog
+		widgetVar="dlgButtonBack"  
+		header="#{msg.MGL077}" 
+		width="380" height="150"
+		modal="true" hideEffect="explode" 
+		resizable="false" appendTo="@(body)" 
+		closeOnEscape="true">
+		
+	    <h:form id="formButtonBack">			    
+	    	<p:hotkey bind="return"  
+	    		oncomplete="PF('dlgButtonBack').hide()"/>
+	    	<center>
+	    		<br/><br/>
+		    	#{msg.MGL078}	<br/><br/><br/>
+		    	
+		    	<p:commandButton 
+		    		value="OK" 
+		    		onclick="PF('dlgButtonBack').hide()"/>
+		    	<br/>
+	    	</center>
+		</h:form>
+	</p:dialog>
+</ui:fragment>

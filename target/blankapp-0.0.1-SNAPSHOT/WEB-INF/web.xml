@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee 
+		http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+	version="4.0">
+
+ 	<!-- Titulo do aplicativo -->
+  	<context-param>
+		<param-name>appTitle</param-name>
+		<param-value>Amazu Tecnologia</param-value>
+  	</context-param>
+  
+  	<!--Pagina inicial -->  
+ 	<welcome-file-list>
+    	<welcome-file>index.html</welcome-file>
+  	</welcome-file-list>
+  	
+  	<!-- Configuracoes do JSF/Facelets -->
+  	<context-param>
+      	<param-name>javax.faces.DEFAULT_SUFFIX</param-name>
+		<param-value>.xhtml</param-value>
+  	</context-param>
+
+	<context-param>
+		<param-name>javax.faces.CONFIG_FILES</param-name>
+		<param-value>/WEB-INF/xml/faces-config.xml</param-value>
+  	</context-param>
+  	
+  	<context-param>
+		<param-name>javax.faces.FACELETS_REFRESH_PERIOD</param-name>
+		<!-- desenvolvimento 0 milissegundo.-->
+		<param-value>0</param-value>
+		<!-- producao desligado.
+		<param-value>-1</param-value> -->
+	</context-param>
+	
+	<!-- omitido o param javax.faces.PROJECT_STAGE
+	assumindo o default (Production) que servirah, tambem, para o
+	desenvolvimento, desabilitando algumas msgs de erro.-->
+	<!-- forcando a limpeza do cache -->
+	<context-param>
+		<param-name>com.sun.faces.defaultResourceMaxAge</param-name>
+		<!-- desenvolvimento 1 milissegundo.-->
+		<param-value>1</param-value>
+		<!-- producao 6 weeks.
+		<param-value>3628800000</param-value> -->
+	</context-param>
+	
+	<context-param>
+		<param-name>javax.faces.STATE_SAVING_METHOD</param-name>
+		<param-value>server</param-value>
+	</context-param>
+	<!-- Fim de configuracoes do JSF/Facelets -->
+	
+	<!-- THEMES -->
+	<context-param>
+		<param-name>primefaces.THEME</param-name>
+		<param-value>#{configBean.skinTheme}</param-value> 
+	</context-param>
+		
+	<!--Configuracoes para o OmniFaces -->
+	<filter>
+		<filter-name>noCacheFilter</filter-name>
+		<filter-class>org.omnifaces.filter.CacheControlFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>noCacheFilter</filter-name>
+		<servlet-name>Faces Servlet</servlet-name>
+ 	</filter-mapping>
+ 	<!--Fim de Configuracoes para o OmniFaces -->
+   	
+	<!-- Configuracoes do FacesServlet -->
+  	<servlet>
+		<servlet-name>Faces Servlet</servlet-name>
+		<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+		<load-on-startup>1</load-on-startup>
+  	</servlet>
+  	
+  	<servlet-mapping>
+		<servlet-name>Faces Servlet</servlet-name>
+		<url-pattern>*.faces</url-pattern>
+  	</servlet-mapping>
+  	<!-- Fim de configuracoes do FacesServlet -->
+  	
+  	<!-- Paginas de erro --> 	 	 
+	<error-page>
+		<error-code>404</error-code>
+	    <location>/pages/errorpages/error404.faces</location>
+	</error-page>
+	  	  	  	
+	<error-page>
+	    <error-code>500</error-code>
+	    <location>/pages/errorpages/error500.faces</location>
+	</error-page>
+	
+	<error-page>
+		<exception-type>javax.servlet.ServletException</exception-type>
+		<location>/pages/errorpages/errorServlet.faces</location>
+	 </error-page>
+	
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/pages/errorpages/viewExpired.faces</location>
+	</error-page>
+	  	
+	<error-page>
+	    <error-code>502</error-code>
+	    <location>/pages/errorpages/error502.faces</location>
+	</error-page>
+	  	
+	<error-page>
+	    <error-code>503</error-code>
+	    <location>/pages/errorpages/error503.faces</location>
+	</error-page> 		
+	<!-- Fim de Paginas de erro -->
+  	
+</web-app>

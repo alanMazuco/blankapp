@@ -1,0 +1,32 @@
+ <ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+    
+    <ui:define name="content">     
+	<h:form>				
+	<br/><br/>
+
+	<p:dataTable id="tableLocales" var="locale"		
+		value="#{configBean.locales}"	
+								rendered="#{not empty configBean.locales}" 	style="width:200px;">
+		
+		<p:column headerText="#{msg.CGL142}">
+			<div align="left">							
+				<p:commandLink ajax="false" value="#{locale}"  
+						action="#{userSessionInBean.mudarIdioma}">						
+				  	<f:param name="locale" value="#{locale}"/>			  
+				</p:commandLink>
+			</div>
+		</p:column>
+	</p:dataTable>		
+	<br/>	
+	<p:commandButton value="Show Case" 	
+				action="/pages/showcase/homeShowCase?faces-redirect=true"/>
+	<br/><br/>	
+		
+	</h:form>	
+	</ui:define>
+</ui:composition>

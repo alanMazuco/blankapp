@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+   
+    <ui:param name="pageTitle" value="TESTE DE UPLOAD"/>
+       
+	<ui:define name="content">
+	        
+		<h:form id="formArquivos">    	
+			<p:commandButton value="Upload" action="#{uploadCaseBean.chamarUpload}" id="myUpload"/>
+			
+			<p:commandButton value="Show Case" 
+					action="/pages/showcase/homeShowCase?faces-redirect=true"/>
+	 	</h:form>
+	     
+		<!-- O componente a:upload deve ser colocado por fora de qualquer form-->
+		<a:upload 		
+			bean="#{uploadCaseBean}"		
+			label="#{msg.MAR013}"
+			invalidFileMessage="#{msg.MGL020}"
+			invalidSizeMessage="#{msg.MAR009}"	/>
+    
+	</ui:define>	
+</ui:composition>

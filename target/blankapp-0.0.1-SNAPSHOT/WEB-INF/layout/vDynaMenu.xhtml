@@ -1,0 +1,26 @@
+<ui:fragment xmlns="http://www.w3.org/1999/xhtml"	
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+			 
+	<!-- TIPOS (variações):	
+		   - tiered
+		   - slide
+		   - panelMenu -->
+	
+	<h:panelGrid bgcolor="silver"  style="width:100%; border:none;margin-top:-2px;"
+		rendered="#{configBean.config.menuType == 'tiered'}">
+		Tiered-1<br/>	Tiered-2<br/>	Tiered-3<br/>
+	</h:panelGrid>
+	
+	<h:panelGrid bgcolor="silver"  style="width:100%; border:none;margin-top:-2px;"
+		rendered="#{configBean.config.menuType == 'slide'}">
+		Slide-1<br/>		Slide-2<br/>		Slide-3<br/>
+	</h:panelGrid>
+	
+	<h:panelGrid bgcolor="silver"  style="width:100%; border:none;margin-top:-2px;"
+		rendered="#{configBean.config.menuType == 'panelMenu'}">
+		Panel Menu-1<br/>	Panel Menu-2<br/>	Panel Menu-3<br/>
+	</h:panelGrid>		
+</ui:fragment>

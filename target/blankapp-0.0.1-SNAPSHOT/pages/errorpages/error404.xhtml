@@ -1,0 +1,20 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	      		
+    <ui:define name="content">  	
+	   	
+   	<br/><br/><br/><br/>
+   	<p:panel style="text-align:left; font-size:14px;width: 300px;">
+   		<h:panelGrid columns="2" >
+   			<h:graphicImage url="#{resource['images:skin/icon_warn.gif']}"/>
+   			#{msg.MGL060}
+   		</h:panelGrid>
+   	</p:panel>	   	
+			
+	</ui:define>		
+</ui:composition>
+

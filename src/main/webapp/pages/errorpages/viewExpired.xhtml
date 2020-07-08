@@ -1,0 +1,25 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+	      		
+    <ui:define name="content">
+  	
+    <h:form>   	
+	   	<br/><br/><br/><br/>
+	   	<p:panel style="text-align:center; font-size:14px;width: 300px;">
+	   		<br/>
+	     		<h:panelGrid columns="2" style="color:blue;text-align:left;">
+		   			<h:graphicImage url="#{resource['images:skin/icon_info.gif']}"/>
+		   			#{msg.MGL019} 
+		   		</h:panelGrid>
+		   		<br/>	   		
+		   		
+		   		<p:commandButton value="OK" action="/pages/home/homePage?faces-redirect=true"/>	   			   		
+	   	</p:panel>    
+    </h:form>	   	
+			
+    </ui:define>		
+</ui:composition>

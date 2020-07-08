@@ -1,0 +1,141 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+
+	<ui:param name="pageTitle" 
+					value="Testando o componente Mensagens"/>
+    
+	<ui:define name="content">          	
+		<h:form id="formMessages">	
+		
+			<h:panelGrid columns="2">		
+				<h:panelGrid>
+					<p:panelGrid id="panelContador" columns="1">
+						<h:outputText value="#{messageCaseBean.contador}"/>	
+					</p:panelGrid>
+									
+					<h:outputText id="txtHello" style="color:black" 
+						value="#{messageCaseBean.txtHello}"/><br/>
+								
+					<p:panel closable="false" header="Cadastro de Veículos" style="width: 300px;">
+							
+						<h:panelGrid columns="2" columnClasses="right,left">
+							<h:outputLabel value="Marca:"/>
+							<p:inputText label="Marca" required="true" 
+									value="#{messageCaseBean.veiculo.marca}"/>				
+							
+							<h:outputLabel value="Modelo:"/>
+							<p:inputText label="Modelo" required="true" 
+									value="#{messageCaseBean.veiculo.modelo}"/>	
+							
+							<h:outputLabel value="Cor:"/>
+							<p:inputText label="Cor" required="true"  	
+								value="#{messageCaseBean.veiculo.cor}"/>			
+							
+							<h:outputLabel value="Ano:"/>
+							<p:inputText label="Ano" required="true" 
+									value="#{messageCaseBean.veiculo.ano}"/>			
+						</h:panelGrid>
+									
+						<f:facet name="footer">
+							<h:panelGrid columns="2">
+								<h:outputText value="Cadastro"/>
+								<a:status/>
+							</h:panelGrid>
+						</f:facet>
+					</p:panel>	
+				</h:panelGrid>
+		
+				<h:panelGrid>
+					<h:panelGrid columns="3">
+						<p:panelGrid columns="1" style="text-align:right;margin-top:64px;">			
+							<h:outputText value="MESSAGE" style="background-color:yellow;"/>			
+						
+							<p:commandButton value="ACTION MESSAGE"  
+									action="#{messageCaseBean.testarActionMessage}"/>
+							<p:commandButton value="CONFIRM MESSAGE" 
+									action="#{messageCaseBean.testarConfirmMessage}"/>
+							
+							<p:commandButton value="WARN CONFIRM MESSAGE"
+									action="#{messageCaseBean.testarWarnConfirmMessage}"/>							
+						</p:panelGrid>
+			
+						
+						<h:panelGroup style="margin-top:-37px;float:left;">
+						 	<h:outputText escape="false" value="&#8227;"  style="font-size: 30px"/>
+						 	<h:outputText escape="false" value="&#8227;"  style="font-size: 30px"/>
+							<h:outputText escape="false" value="&#8227;"  style="font-size: 30px"/>
+						 	<h:outputText escape="false" value="&#8227;"  style="font-size: 30px"/>
+						 	<h:outputText escape="false" value="&#8227;"  style="font-size: 30px"/>
+						</h:panelGroup>	
+				
+						<h:panelGrid columns="1" style="text-align:left; margin-top:-37px;">
+							<h:panelGrid columns="2">
+									<h:panelGrid  style="margin-top:-36px;margin-left:-10px;">
+										<h:outputLabel value="{" 
+												style="font-size:200px !important;color:silver;"/>
+									</h:panelGrid>
+									
+									<h:panelGrid style="background-color:yellow">
+										<p:commandButton value="INFO_CLOSABLE"  
+												action="#{messageCaseBean.testarInfoClosable}"/>
+													
+										<p:commandButton value="INFO_NOT_CLOSABLE"  
+												action="#{messageCaseBean.testarInfoNotClosable}"/>
+								
+										<p:commandButton value="WARN"  	
+												action="#{messageCaseBean.testarWarn}"/>
+									
+										<p:commandButton value="ERROR"  
+											action="#{messageCaseBean.testarError}"/>
+									
+										<p:commandButton value="FATAL_ERROR"  
+												action="#{messageCaseBean.testarFatalError}"/>
+								
+										<p:commandButton value="GROWL_INFO"  
+												action="#{messageCaseBean.testarGrowlInfo}"/>
+								
+										<p:commandButton value="GROWL_ERROR"  
+												action="#{messageCaseBean.testarGrowlError}"/>
+									</h:panelGrid>
+								</h:panelGrid>
+						</h:panelGrid>
+					</h:panelGrid>
+				</h:panelGrid>
+			</h:panelGrid>				
+			<br/><br/>
+			
+			<h:panelGroup>
+				<p:commandButton value="Printar erro" action="#{messageCaseBean.printarErro}"/>			
+			
+				<p:commandButton value="Msg parametrizadas" 
+					action="#{messageCaseBean.testarMsgParametrizadas}"/>		
+			
+				<p:commandButton value="Sem bundle" action="#{messageCaseBean.testarMsgSemBundle}"/>	
+						<p:commandButton value="Com lista"  
+								action="#{messageCaseBean.testarMsgComLista}"/>		
+				<br/><br/>
+		
+				<p:commandButton value="ACTION MESSAGE + WARN + Lista (variante)" 
+					action="#{messageCaseBean.testarActionMessageWarnVarianteComLista}"/>								
+				<br/><br/>
+				
+				<p:commandButton value="Update" immediate="true"  
+					action="#{messageCaseBean.testarUpdate}"/>
+						
+				<p:commandButton value="Redirect" immediate="true" 
+						action="#{messageCaseBean.testarRedirect}"/>				
+			</h:panelGroup>
+			<br/><br/>	
+			
+			<p:commandButton value="Show Case"  immediate="true"
+					action="/pages/showcase/homeShowCase?faces-redirect=true" />						
+			<br/><br/>
+			
+		</h:form>
+	</ui:define>
+</ui:composition>

@@ -1,0 +1,80 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:cc="http://java.sun.com/jsf/composite"
+	xmlns:ui="http://java.sun.com/jsf/facelets"    
+	xmlns:h="http://java.sun.com/jsf/html"
+  	xmlns:f="http://java.sun.com/jsf/core"    
+   	xmlns:p="http://primefaces.org/ui">
+    
+	<cc:interface></cc:interface>      
+	<cc:implementation>	
+		<h:form id="formDialogConfirm">					
+			
+			<p:hotkey bind="return" oncomplete="PF('dlgConfirm').hide()"  
+				action="#{dialogBean.actionOkYes}" update="#{dialogBean.update}"
+				onstart="$(function(){PrimeFaces.focus(null);});"/>
+				
+			<div>
+				<p:outputPanel id="dialogConfirm" >				
+					<p:autoUpdate />
+							
+					<p:dialog  modal="true" widgetVar="dlgConfirm" 
+						header="#{dialogBean.header}" width="450" 
+						closable="#{dialogBean.closable}"
+						resizable="false" style="-webkit-user-select: none;cursor:pointer;">
+						
+						<p:panel style="width:200px;text-align:center;background-color:yellow;" 
+							rendered="#{dialogBean.confirmWarn == true?'true':'false'}">
+					        <h:outputText value="#{msg.CGL165}"    	 
+								style="color:red;font-weight:bold;text-align:center;
+									font-size:15px !important;"/>
+					        <p:effect type="shake" event="load" />
+					 </p:panel>
+									    	
+						<h:panelGrid width="100%">
+							<p:spacer height="5"/>				    	
+							<h:panelGrid columns="2" 
+								bgcolor="#{dialogBean.confirmWarn==true?'red':'#98FB98'}" 
+								 width="100%" style="border:1px solid #228B22;-moz-border-radius:4px; 
+										-webkit-border-radius: 4px; border-radius: 4px;">		    		
+								<p:graphicImage value="#{resource['images:skin/warnIcon.png']}"/>
+								<h:messages layout="table"
+									style="color:#{dialogBean.confirmWarn==true?'white':'inherit'};
+										font-weight:bold;" />
+							</h:panelGrid>
+						</h:panelGrid>		    	
+						
+						<p:outputPanel id="gridListaConfirm">
+							<div style="text-align:center">
+								<div style="text-align:left;">
+									<p:scrollPanel mode="native" 
+										rendered="#{not empty dialogBean.lista}" 
+										style="padding:5px 5px 5px 5px;
+												height:#{dialogBean.lista.size()>7?'97px':''};
+													width:414px;">
+										<ui:repeat value="#{dialogBean.lista}" var="lista" >				       	
+												<h:outputText value="#{lista}"/> <br/>   	 	
+										</ui:repeat>
+									</p:scrollPanel>		    	
+								</div><br/>		
+					    						    			    	
+								<div>				    			    				    	
+									<p:commandButton id="btnOkYesConfirm"  ajax="#{dialogBean.ajax}" 
+										onclick="PF('dlgConfirm').hide()" 
+										action="#{dialogBean.actionOkYes}"
+										value="#{msg.CGL070}" update="#{dialogBean.update}"
+										widgetVar="btnOkYes" />							    		
+									<p:commandButton action="#{dialogBean.actionNo}" id="btnNoConfirm"  
+										oncclick="PF('dlgConfirm').hide()" 	value="#{msg.CGL055}"/>	    		
+								</div>
+							</div>			    					    	
+						</p:outputPanel>					
+						<p:spacer height="10"/>						
+					</p:dialog>								
+				</p:outputPanel>	
+			</div>
+		</h:form>	
+	</cc:implementation>	
+</html>

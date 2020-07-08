@@ -1,0 +1,82 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" 
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">	
+	
+	<!-- Esta pagina sofrerah modificacao. -->	
+	<f:view contentType="text/html" locale="#{userSessionInBean.locale}">
+		<h:head>
+			<title>#{facesContext.externalContext.getInitParameter('appTitle')}</title>						     					
+			<link rel="shortcut icon" href="#{facesContext.externalContext.
+				requestContextPath}/resources/images/favicon.ico" />					
+			<link rel="icon" type="image/gif" href="#{facesContext.externalContext.
+				requestContextPath}/resources/images/animated_favicon_daprom.gif"/>						
+			<h:outputStylesheet library="css" name="my_style.css"/>
+			
+			<h:outputStylesheet
+				library="#{configBean.config.skinTheme}"
+				name="theme.css"/>
+				
+			<h:outputScript library="js" name="navegacao.js" target="head"/>
+			
+			<h:outputScript library="js" name="maskValidator.js" target="head"/>	
+		</h:head>
+		
+		<h:body>						
+			<div class="container">
+
+				<h:graphicImage  styleClass="stretch" style="position:absolute;z-index:-1000;"
+					value="/resources/images/skin/#{configBean.config.
+						skinBackground}/img_background.gif"/>	
+			
+		    	<div>
+		    		<ui:include src="header.xhtml"/>	    		
+		    		
+		    		<div style="text-align:center">
+			    		<h:panelGrid cellpadding="0" cellspacing="0" width="100%" 
+			    			style="position:relative;"
+			    			rendered="#{configBean.config.menuType == 'menuBar'}">
+			    			<ui:include src="hDynaMenu.xhtml"/>
+			    		</h:panelGrid>
+		    		</div>
+		    			    		
+		    		<h:panelGrid cellpadding="0" cellspacing="0" width="200" 
+						rendered="#{configBean.config.menuType != 'menuBar'}">
+						<ui:include src="vDynaMenu.xhtml"/>
+					</h:panelGrid>		    	
+		    	</div>
+		    										
+		    	<div class="body">
+		    		<div align="center" >
+		    			<h:panelGrid style="text-align:center;height:80px;width:100%" rendered="#{not empty pageTitle}">
+		    				<h:outputText styleClass="page-title" value="#{pageTitle}"/>		    			
+		    			</h:panelGrid>	    			
+		    			<ui:insert name="content"/>
+		    		</div>
+		    	</div>
+		    	
+		    	<div style="text-align:center">		
+		    		<ui:include src="footer.xhtml"/>		    		
+		    	</div>		    	
+			</div>	
+			
+			<a:dialog/>
+			<a:dialogConfirm/>
+			
+			<p:idleMonitor timeout="2400000">
+				<p:ajax event="idle" listener="#{userSessionInBean.idleListener}"/> 
+			</p:idleMonitor>	
+			
+			<!-- tela de aviso ao utilizar botao retorno do browser -->
+			<ui:include src="dlgButtonBack.xhtml"/>
+							
+		</h:body>		
+	</f:view>	
+</html>

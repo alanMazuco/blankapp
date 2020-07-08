@@ -1,0 +1,37 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:a="http://java.sun.com/jsf/composite/components">
+	<ui:param name="pageTitle" value="Themes" />
+	<ui:define name="content">
+		<h:form id="formThemes">
+			<div style="width: 100%">
+				<p:selectOneMenu id="advanced" style="width:165px;" effect="fade"
+					converter="objectConverter" value="#{configBean.theme}" var="t"
+					valueChangeListener="#{configBean.saveTheme}">
+					<p:ajax event="change" oncomplete="submit()" />
+					<f:selectItems value="#{configBean.themes}" var="theme"
+						itemLabel="#{theme.name}" itemValue="#{theme}" />
+					<p:column>
+						<h:graphicImage
+							value="/resources/images/skin/themeswitcher/#{t.value}.jpg" />
+					</p:column>
+					<p:column>
+						#{t.value}
+					</p:column>
+				</p:selectOneMenu>
+			</div>
+			<br />
+			<br />
+			<p:panel style="width:400px">
+				<p:calendar mode="inline"></p:calendar>
+			</p:panel>
+			<br />
+			<p:commandButton value="Show Case"
+				action="/pages/showcase/homeShowCase?faces-redirect=true" />
+		</h:form>
+	</ui:define>
+</ui:composition>

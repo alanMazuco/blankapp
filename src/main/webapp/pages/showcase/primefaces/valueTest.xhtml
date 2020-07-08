@@ -1,0 +1,143 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	template="/WEB-INF/layout/template.xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<ui:param name="pageTitle" value="Validação e Conversão" />
+
+	<ui:define name="content">
+		<h:form id="formValues">
+			<p:panel header="VALORES PARA TESTE" style="width:60%;"
+				footer="Testando entradas com Ajax">
+				<br />
+				<p:panelGrid columns="2" style="width:100%;" columnClasses="top10,top90">
+					<h:panelGroup>
+						<p:selectOneMenu id="selectValue"
+							value="#{convValidatorCaseBean.valueTest}"
+							converter="objectConverter" effect="fade" style="width:120px;">
+
+							<p:ajax event="change" update="@form" 
+								listener="#{convValidatorCaseBean.setarValueTest}"/>
+
+							<f:selectItem itemLabel="[SELECIONE]" itemValue="" />
+							<f:selectItems value="#{convValidatorCaseBean.valueTests}"
+								var="valueTest" itemLabel="objeto nº #{valueTest.id}"
+								itemValue="#{valueTest}" />
+						</p:selectOneMenu>
+						<p:spacer height="30" width="1" />
+						<p:commandButton value="Update" update="formValues" />
+					</h:panelGroup>
+
+					<p:panelGrid columns="3" style="width:100%;" columnClasses="top20,top30,top30">
+						<h:outputLabel value="Nomes Próprios:" />
+						<h:inputText label="Nomes Próprios" onkeypress="mascara(this,firstName)"
+							value="#{convValidatorCaseBean.valueTest.strValue}"/>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.strValue}" />
+
+						<h:outputLabel value="Integer:" />
+						<h:inputText label="Integer"
+							value="#{convValidatorCaseBean.valueTest.intValue}"
+							onkeypress="mascara(this,numero)"
+							converterMessage="O número é grande demais."/>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.intValue}" />
+
+						<h:outputLabel value="Integer 4 Dig:" />
+						<h:inputText label="Integer 4 Dig"
+							value="#{convValidatorCaseBean.valueTest.intValue4}"
+							onkeypress="mascara(this,numero)" maxlength="4" />
+						<h:outputText value="#{convValidatorCaseBean.valueTest.intValue4}" />
+
+						<h:outputLabel value="Longo:" />
+						<h:inputText label="Longo" onkeypress="mascara(this,numero)"
+							value="#{convValidatorCaseBean.valueTest.longValue}"/>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.longValue}" />
+
+						<h:outputLabel value="Double:" />
+						<h:inputText label="Double"
+							value="#{convValidatorCaseBean.valueTest.doubleValue}"
+							onkeypress="mascara(this,double)" />
+						<h:outputText value="#{convValidatorCaseBean.valueTest.doubleValue}" />
+
+						<h:outputLabel value="Money:" />
+						<h:inputText label="Money"
+							value="#{convValidatorCaseBean.valueTest.moeda}"
+							onkeypress="mascara(this,moeda);">
+							<f:convertNumber pattern="###,##0.00" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.moeda}" />
+
+						<h:outputLabel value="Date:" />
+						<h:inputText label="Date"
+							value="#{convValidatorCaseBean.valueTest.dateValue}"
+							onkeypress="mascara(this,data);" maxlength="10">
+							<f:converter converterId="dateConverter" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.dateValue}" />
+
+						<h:outputLabel value="Email:" />
+						<h:inputText label="Email" value="#{convValidatorCaseBean.valueTest.email}">
+							<f:validator validatorId="emailValidator" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.email}" />
+
+						<h:outputLabel value="String 6 Carac:" />
+						<h:inputText label="String 6 Carac" maxlength="6"
+							value="#{convValidatorCaseBean.valueTest.strValue6}"
+							validatorMessage="String 6 Carac: #{msg.MGL003}">
+							<f:validateRegex pattern="#{convValidatorCaseBean.limitChar}" />
+							<f:validateLength minimum="6" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.strValue6}" />
+
+						<h:outputLabel value="String Min 3 Carac:" />
+						<h:inputText label="String Min 3 Carac"
+							value="#{convValidatorCaseBean.valueTest.strValueNoSpaceBlank}"
+							validatorMessage="String Min 3 Carac: #{msg.MGL004}">
+							<f:validateRegex
+								pattern="#{convValidatorCaseBean.limitCharNotBlankSpace}" />
+							<f:validateLength minimum="3" />
+						</h:inputText>
+						<h:outputText
+							value="#{convValidatorCaseBean.valueTest.strValueNoSpaceBlank}" />
+
+						<h:outputLabel value="CPF:" />
+						<h:inputText label="CPF" value="#{convValidatorCaseBean.valueTest.cpf}"							
+							onkeypress="mascara(this,cpf)" maxlength="14">
+							<f:validator validatorId="cpfValidator" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.cpf}" />
+
+						<h:outputLabel value="CNPJ:" />
+						<h:inputText label="CNPJ" value="#{convValidatorCaseBean.valueTest.cnpj}"							
+							onkeypress="mascara(this,cnpj)" maxlength="18">
+							<f:validator validatorId="cnpjValidator" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.cnpj}" />
+						<h:outputLabel value="Phone:" />
+						<h:inputText label="Phone" onkeydown="mascara(this,tel)"
+							value="#{convValidatorCaseBean.valueTest.tel}" maxlength="14">
+							<f:validator validatorId="phoneValidator" />
+							<f:validateLength minimum="13" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.tel}" />
+
+						<h:outputLabel value="CEP:" />
+						<h:inputText label="CEP"
+							value="#{convValidatorCaseBean.valueTest.cep}" maxlength="9"
+							onkeypress="mascara(this,cep)" validatorMessage="#{msg.MGL002}">
+							<f:converter converterId="cepConverter" />
+							<f:validateLength minimum="8" />
+						</h:inputText>
+						<h:outputText value="#{convValidatorCaseBean.valueTest.cep}" />
+					</p:panelGrid>
+				</p:panelGrid>
+			</p:panel>
+
+			<br />
+			<p:commandButton value="Show Case"
+				action="/pages/showcase/homeShowCase?faces-redirect=true" immediate="true" />
+		</h:form>
+	</ui:define>
+</ui:composition>
