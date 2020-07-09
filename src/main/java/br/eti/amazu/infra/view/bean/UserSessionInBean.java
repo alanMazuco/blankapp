@@ -3,10 +3,14 @@ package br.eti.amazu.infra.view.bean;
 import java.io.Serializable;
 import java.util.Locale;
 
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 
+import org.apache.log4j.Level;
+
 import br.eti.amazu.infra.util.FacesUtil;
+import br.eti.amazu.infra.util.log.Log;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,17 +27,19 @@ public class UserSessionInBean implements Serializable {
 	private String userLogged;	
 	private boolean usuarioDevLogado;		
 	private Locale locale;
-	
-	public UserSessionInBean(){		
-		this.setLocale(FacesUtil.getLocale()); //Obtem o idioma local.	
-	}
+	transient FacesUtil facesUtil = new FacesUtil();
+		
+	@PostConstruct
+	public void init(){			
+		this.setLocale(facesUtil.getLocale()); //Obtem o idioma local.					
+	}		
    
 	/* Um botao de acao de uma pagina qualquer pode mudar o idioma,
 	 * mas tem de passar um parametro para qual idioma a ser mudado.
 	 *------------------------------------------------------------*/
 	public void mudarIdioma(){
-		String localeStr = FacesUtil.getParam("locale");
-
+		String localeStr = facesUtil.getParam("locale");
+				
 		if(localeStr.length() == 2){
 			locale = new Locale(localeStr);
 			
@@ -41,8 +47,8 @@ public class UserSessionInBean implements Serializable {
 			locale = new Locale(localeStr.substring(0,2), localeStr.substring(3));
 		}
 
-		FacesUtil.setLocale(locale);		
-		System.out.println(FacesUtil.getMessage("MGL064",new String[]{localeStr}));
+		facesUtil.setLocale(locale);		
+		Log.setLogger(ConfigBean.class, facesUtil.getMessage("MGL064",new String[]{localeStr}), Level.INFO);		
 	}
 	
 	/* *********************
@@ -50,8 +56,8 @@ public class UserSessionInBean implements Serializable {
 	 * Utiliza o componente IdleMonitor do PrimeFaces para invalidar a sessão. 
 	 ***********************/
 	public void idleListener() {				
-		FacesUtil.redirect  ("/pages/errorpages/viewExpired");
-		FacesUtil.sessionInvalidate();			
+		facesUtil.redirect  ("/pages/errorpages/viewExpired");
+		facesUtil.sessionInvalidate();			
 	}
 			
 }

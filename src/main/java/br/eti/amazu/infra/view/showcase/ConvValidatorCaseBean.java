@@ -27,7 +27,7 @@ public class ConvValidatorCaseBean implements Serializable{
 	private static final long serialVersionUID = 8291712218885480537L;
 	
 	private ValueTest valueTest = new ValueTest();
-	private List<ValueTest> valueTests = new ArrayList<ValueTest>();
+	private List<ValueTest> valueTests = new ArrayList<>();
 
 	@PostConstruct
 	public void init(){		

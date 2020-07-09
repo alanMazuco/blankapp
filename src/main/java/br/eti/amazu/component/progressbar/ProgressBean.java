@@ -3,15 +3,19 @@ package br.eti.amazu.component.progressbar;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.el.MethodExpression;
 import javax.faces.context.FacesContext;
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+
+import org.apache.log4j.Level;
 import org.primefaces.PrimeFaces;
 
 import br.eti.amazu.component.dialog.DialogBean;
 import br.eti.amazu.component.dialog.DialogType;
+import br.eti.amazu.infra.util.log.Log;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,6 +26,8 @@ import lombok.Setter;
 public class ProgressBean implements Serializable {
 
 	private static final long serialVersionUID = -3270934799065389564L;
+	
+	private static final String MESSAGE_PRB001 = "PRB001";
 	
 	private int value = 0; //Variavel que incrementa a cada iteracao. Inicia com zero.
 	private int pSize = 1; //Tamanho total da progress.	
@@ -56,7 +62,8 @@ public class ProgressBean implements Serializable {
 		if(actionAfterCancel != null){	
 			this.actionAfterCancel = "#{" + actionAfterCancel + "}";		    
 		}				
-		System.out.println(ProgressUtil.getMessage("PRB002"));
+		
+		Log.setLogger(this.getClass(), ProgressUtil.getMessage("PRB002"), Level.INFO);
 	}
 
 
@@ -64,42 +71,31 @@ public class ProgressBean implements Serializable {
 		PrimeFaces.current().executeScript(
 				"PF('pbAjax').cancel();PF('progressbar').hide();PF('startButton').enable();");
 		
-		System.out.println(ProgressUtil.getMessage("PRB001"));		
+		Log.setLogger(this.getClass(), ProgressUtil.getMessage(MESSAGE_PRB001), Level.INFO);
+		
 		this.reset();	
 	}
 	
-	public void onComplete(){
+	public void onComplete() throws InterruptedException{
 		
-		System.out.println(ProgressUtil.getMessage("PRB001"));
+		Log.setLogger(this.getClass(), ProgressUtil.getMessage(MESSAGE_PRB001), Level.INFO);
+		Thread.sleep(800);
 		
-		try {
-			Thread.sleep(800);
-			
-			dialogBean.addActionMessage(
-				messageComplete == null ? ProgressUtil.getMessage("MGL025") : messageComplete,	
-					"progressBean.onAfterComplete", null,resultado);		
-			
-			reset();
-			
-		} catch (InterruptedException e) {			
-			e.printStackTrace();
-		}		
+		dialogBean.addActionMessage(
+			messageComplete == null ? ProgressUtil.getMessage("MGL025") : messageComplete,	
+				"progressBean.onAfterComplete", null,resultado);		
+		
+		reset();		
 	}
 	
-	public void onCancel(){	
+	public void onCancel() throws InterruptedException{
+			
+		setCancelou(true);			
+		Log.setLogger(this.getClass(), ProgressUtil.getMessage(MESSAGE_PRB001), Level.INFO);
+		Thread.sleep(500);
 		
-		try {
-			
-			setCancelou(true);			
-			System.out.println(ProgressUtil.getMessage("PRB001"));
-			Thread.sleep(500);
-			
-			dialogBean.addActionMessage(ProgressUtil.getMessage("MGL024"),	
-					"progressBean.onAfterCancel", null, resultado);	
-			
-		} catch (InterruptedException e) {			
-			e.printStackTrace();
-		}	
+		dialogBean.addActionMessage(ProgressUtil.getMessage("MGL024"),	
+				"progressBean.onAfterCancel", null, resultado);	
 	}
 	
 	public void onStart(){
@@ -111,31 +107,25 @@ public class ProgressBean implements Serializable {
 		}
 	}
 	
-	public void onError(String msg){
+	public void onError(String msg) throws InterruptedException{
+				
+		setCancelou(true);		
 		
-		try{
-			setCancelou(true);		
-			
-			PrimeFaces.current().executeScript(
-					"PF('pbAjax').cancel();PF('progressbar').hide();PF('startButton').enable();");
-			
-			System.out.println(ProgressUtil.getMessage("PRB001"));			
-			Thread.sleep(800);
-			this.reset();
-			
-			dialogBean.addMessage(msg, DialogType.ERROR);
-			
-		} catch (InterruptedException e) {			
-			e.printStackTrace();
-		}	
+		PrimeFaces.current().executeScript(
+				"PF('pbAjax').cancel();PF('progressbar').hide();PF('startButton').enable();");
 		
+		Log.setLogger(this.getClass(), msg, Level.ERROR);			
+		Thread.sleep(800);
+		this.reset();
+		
+		dialogBean.addMessage(msg, DialogType.ERROR);
 	}
 	
 	public void onInterrupt(String msg){		
 		setCancelou(true);				
 		PrimeFaces.current().executeScript("PF('pbAjax').cancel();");
 		this.setProgress(100);		
-		System.out.println("Interrompeu o programa");		
+		Log.setLogger(this.getClass(), msg + " - Interrompeu o programa", Level.INFO);
 	}
 	
 	public void onAfterComplete(){
@@ -183,6 +173,6 @@ public class ProgressBean implements Serializable {
 		}
 		
 		return progress;
-	}	
+	}
 	
 }

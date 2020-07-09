@@ -1,6 +1,8 @@
 /**********************
  * Funcoes Principais
  ********************/
+var v_obj;
+var v_fun;
 function mascara(o,f){
 	v_obj=o;
     v_fun=f;
@@ -54,16 +56,7 @@ function tel(v){
     	v=v.replace(/(\d{4})(\d)/,"$1-$2");
     }
     return v;
-}
-           
-/*CPF  999.999.999-99*/
-function cpf(v){
-	v=v.replace(/\D/g,"");                                   
-	v=v.replace(/(\d{3})(\d)/,"$1.$2");         
-	v=v.replace(/(\d{3})(\d)/,"$1.$2");                                                                                                 
-	v=v.replace(/(\d{3})(\d{1,2})$/,"$1-$2"); 
-	return v;
-}
+}          
         
 /*CEP 99999-999*/
 function cep(v){
@@ -71,29 +64,20 @@ function cep(v){
     v=v.replace(/^(\d{5})(\d)/,"$1-$2"); 
 	return v;
 }
-        
-/*CNPJ 99.999.999/0001-00*/
-function cnpj(v){
-	v=v.replace(/\D/g,"");                              
-	v=v.replace(/^(\d{2})(\d)/,"$1.$2");      
-	v=v.replace(/^(\d{2})\.(\d{3})(\d)/,"$1.$2.$3"); 
-	v=v.replace(/\.(\d{3})(\d)/,".$1/$2");              
-	v=v.replace(/(\d{4})(\d)/,"$1-$2");                        
-	return v;
-}
          
 /*Site http://www.site.com.br*/
 function site(v){
 	v=v.replace(/^http:\/\/?/,"");
-	dominio=v;
-	caminho="";
+	let dominio=v;
+	let caminho="";
 	
-	if(v.indexOf("/")>-1)
+	if(v.indexOf("/")>-1){
 		dominio=v.split("/")[0];
 		caminho=v.replace(/[^\/]*/,"");
 		dominio=dominio.replace(/[^\w\.\+-:@]/g,"");
 		caminho=caminho.replace(/[^\w\d\+-@:\?&=%\(\)\.]/g,"");
-		caminho=caminho.replace(/([\?&])=/,"$1");		
+		caminho=caminho.replace(/([\?&])=/,"$1");	
+	}
 	if(caminho!="") dominio=dominio.replace(/\.+$/,"");	
 	v="http://"+dominio+caminho;
 	return v;
@@ -112,15 +96,7 @@ function hora(v){
 	v=v.replace(/\D/g,""); 
 	v=v.replace(/(\d{2})(\d)/,"$1:$2");  
 	return v;
-}
-        
-/*Moeda 5.33*/
-function moeda(v){	
-	v=v.replace(/\D/g,"");	
-	v=v.replace(/^([0-9]{3}\.?){3}-[0-9]{2}$/,"$1.$2");
-	v=v.replace(/(\d)(\d{2})$/,"$1.$2");	
-	return v;
-} 
+}        
 
 /*Somente letras  abcd...*/
 function letras(v){

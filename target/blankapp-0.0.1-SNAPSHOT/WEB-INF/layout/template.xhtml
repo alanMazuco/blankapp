@@ -3,7 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="en" xml:lang="en"
+	xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:f="http://java.sun.com/jsf/core"
@@ -27,6 +28,8 @@
 			<h:outputScript library="js" name="navegacao.js" target="head"/>
 			
 			<h:outputScript library="js" name="maskValidator.js" target="head"/>	
+			
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js"></script>
 		</h:head>
 		
 		<h:body>						
@@ -54,11 +57,13 @@
 		    	</div>
 		    										
 		    	<div class="body">
-		    		<div align="center" >
+		    		<div style="text-align:center;width:auto;height:auto;margin:0 auto;display:inline-block;" >
 		    			<h:panelGrid style="text-align:center;height:80px;width:100%" rendered="#{not empty pageTitle}">
 		    				<h:outputText styleClass="page-title" value="#{pageTitle}"/>		    			
-		    			</h:panelGrid>	    			
-		    			<ui:insert name="content"/>
+		    			</h:panelGrid>
+		    			<div style="text-align:center;width:auto;height:auto;margin:0 auto;display:inline-block;">
+		    				<ui:insert name="content"/>
+		    			</div>		    			
 		    		</div>
 		    	</div>
 		    	

@@ -20,6 +20,8 @@ import lombok.Setter;
 public class UploadCaseBean implements Serializable{
 
 	private static final long serialVersionUID = -8702542368264033202L;
+	
+	private static final String FILES = "files";
 
 	@Inject
 	DialogBean dialogBean;
@@ -35,18 +37,19 @@ public class UploadCaseBean implements Serializable{
 		/*  Os arquivos vao para, neste caso, o diretorio C do meu computador.
 		 *  Lembrando que o meu computador (localhost) tambem eh o servidor.
 		 * Voce deve planejar bem o local dos arquivos recebidos, em caso de servidror remoto */
-		String servidor = ""; //se servidor remoto - considere ter que digitar o IP aqui...
+		String servidor = "/"; //se servidor remoto - considere ter que digitar o IP aqui...
 		
 		//tipos de arquivos suportados pelo componente NESTE TESTE.
 		allowTypes = 
 			"/(\\.|\\/)(gif|jpe?g|png|pdf|zip|xml|xhtml|html|css|txt|mp3|doc|doc|xls|xlsx|avi)$/";
 		
-		String resourcePath =servidor + "C:"; //no meu caso tenho um diretorio "C".
-		if(!FileUtil.isExisteFileOrDir(resourcePath + "/files")){ //local dos arquivos -D:/files
-			FileUtil.criarDiretorio(resourcePath + "/files");
+		String resourcePath =servidor;
+		if(!new FileUtil().isExisteFileOrDir(resourcePath + FILES)){ //local dos arquivos /files
+			new FileUtil().criarDiretorio(resourcePath + FILES);
 		}
-		fullPath = resourcePath + "/files";
-		upload = new Upload(dialogBean, UploadMode.FILE_SERVER, fullPath, null, false);
+		fullPath = resourcePath + FILES;
+				
+		upload = new Upload(dialogBean, UploadMode.FILE_SERVER, fullPath, false);
 	}
 		
 }

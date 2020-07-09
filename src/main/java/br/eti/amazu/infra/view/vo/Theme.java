@@ -4,16 +4,23 @@ import java.util.ArrayList;
 import java.util.List;
 
 import br.eti.amazu.component.pworld.domain.AbstractEntity;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Theme extends AbstractEntity<Object> {
+@EqualsAndHashCode(callSuper = true)
+public class Theme extends AbstractEntity<Long> {
+	
 	private static final long serialVersionUID = 1L;
+	
 	private Long id;
+	
 	private String name;
 	private String value;
+	
+	@EqualsAndHashCode.Exclude
 	private List<Theme> themes;
 
 	public Theme(Long id, String name, String value) {
@@ -21,10 +28,6 @@ public class Theme extends AbstractEntity<Object> {
 		this.name = name;
 		this.value = value;
 	}
-
-	public Long getId() {
-		return id;
-	}	
 
 	public List<Theme> getThemes() {
 		themes = new ArrayList<>();

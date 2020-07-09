@@ -3,12 +3,14 @@ package br.eti.amazu.component.dialog;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.el.MethodExpression;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
+
 import org.primefaces.PrimeFaces;
 
 import lombok.Getter;
@@ -22,6 +24,9 @@ public class DialogBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
+	private static final String ACTION_BUTTON_OK_YES = "actionButtonOkYes";
+	private static final String MESSAGE_CGL110 = "CGL110";
+	
 	FacesMessage message; //...................A mensagem a ser impressa na tela.
 	private boolean closable; //...............Se a janela conterá um botao "close".
 	private String header; //..................A string na barra e titulo.	
@@ -32,7 +37,7 @@ public class DialogBean implements Serializable {
 	private boolean ajax = true; //............Se o processamento  serah Ajax ou nao.
 	private boolean confirmWarn = false; //....Se a mensagem eh tipo CONFIRM WARN ou nao.
 	private List<String> lista = new ArrayList<>();//....A lista a ser exibida.
-
+		
 	/* 1) MESSAGE
 	 *    Trata-se de um metodo com duas assinaturas:
 	 *    - 1a ASSINATURA - 3 parametros (bundle, dialogType e lista)
@@ -49,17 +54,17 @@ public class DialogBean implements Serializable {
 		
 	private void setAddMessage(String bundle, DialogType dialogType, List<String> lista){		
 		//Inicializam-se as variaveis...
-		tipoDialog = dialogType.toString();
+		tipoDialog = dialogType.toString(); 
 		actionButtonOkYes = null;
 		actionButtonNo = null;		
 		closable = true;
-		confirmWarn = false;
+		confirmWarn = false;		
 		
 		//Retiro a action da sessao
-		this.removeObjectTheSession("actionButtonOkYes");
+		this.removeObjectTheSession(ACTION_BUTTON_OK_YES);
 		
 		//Inicializa a lista - ela pode vir nula, e a mensagem em DialogUtil.
-		this.lista = new ArrayList<String>();
+		this.lista = new ArrayList<>();
 		if(lista != null) this.lista = lista;		
 		setHeaderAndMessageInDialogType(dialogType, bundle);
 		DialogUtil.setMessage(message);		
@@ -116,7 +121,7 @@ public class DialogBean implements Serializable {
 		this.actionButtonNo = null;
 		this.update = null;
 		closable=false;			
-		this.lista = new ArrayList<String>();
+		this.lista = new ArrayList<>();
 		if(lista != null) this.lista = lista;		
 		header=DialogUtil.getMessage("CGL109");		
 		
@@ -126,7 +131,7 @@ public class DialogBean implements Serializable {
 		//Definindo a acao do botao YES ou do botao OK
 		if(actionButtonOkYes != null) {
 			this.actionButtonOkYes = "#{" + actionButtonOkYes + "}";
-			this.putObjectInSession("actionButtonOkYes", "#{" + actionButtonOkYes + "}");
+			this.putObjectInSession(ACTION_BUTTON_OK_YES, "#{" + actionButtonOkYes + "}");
 		}		
 		//Definindo a mensagem
 		if(update != null) this.update = update;		
@@ -175,7 +180,7 @@ public class DialogBean implements Serializable {
 		this.actionButtonNo = null;
 		this.update = null;
 		closable=true;
-		this.lista = new ArrayList<String>();
+		this.lista = new ArrayList<>();
 		if(lista != null) this.lista = lista;			
 
 		//Definindo a mensagem
@@ -192,7 +197,7 @@ public class DialogBean implements Serializable {
 		
 		if(actionButtonOkYes != null) {
 			this.actionButtonOkYes = "#{" + actionButtonOkYes + "}";
-			this.putObjectInSession("actionButtonOkYes", "#{" + actionButtonOkYes + "}");
+			this.putObjectInSession(ACTION_BUTTON_OK_YES, "#{" + actionButtonOkYes + "}");
 		}	
 		
 		if(update != null) this.update = update;
@@ -205,7 +210,7 @@ public class DialogBean implements Serializable {
 	public void actionOkYes(){
 		
 		if(actionButtonOkYes==null){
-			actionButtonOkYes = (String) this.getObjectFromSession("actionButtonOkYes");
+			actionButtonOkYes = (String) this.getObjectFromSession(ACTION_BUTTON_OK_YES);
 		}
 		
 		if(actionButtonOkYes !=null){
@@ -231,28 +236,28 @@ public class DialogBean implements Serializable {
 		
 	/*Apresenta o dialog.
 	 * Lembrando que existe tres tipos de dialog:
-	 * - dialog (existe uma xhtml para ele);
+	 * - dialog (existe uma xhtml para ele)
 	 * - confirmDialog (tambem existe uma xhtml para ele).
 	 * - dlgGrowl (estah dentro de dialog.xhtml).
 	 ------------------------------------------*/
-	void showDialog(){	
+	void showDialog(){			
 		PrimeFaces.current().ajax().update("dialog");
 		PrimeFaces.current().ajax().update("gridLista");
 		PrimeFaces.current().executeScript("PF('dlg').show()");
 	}
 
-	void showDialogConfirm(){
+	void showDialogConfirm(){		
 		PrimeFaces.current().ajax().update("dialogConfirm");
 		PrimeFaces.current().ajax().update("gridListaConfirm");
-		PrimeFaces.current().executeScript("PF('dlgConfirm').show()");
+		PrimeFaces.current().executeScript("PF('dlgConfirm').show()");		
 	}
 	
 	/*Apresenta o growl. 
 	 -----------------*/
-	void showGrowl(){	
+	void showGrowl(){			
 		PrimeFaces.current().ajax().update("dialog");
-		PrimeFaces.current().ajax().update("gridLista1");
-		PrimeFaces.current().executeScript("PF('dlgGrowl').show()");
+		PrimeFaces.current().ajax().update("gridLista1");		
+		PrimeFaces.current().executeScript("PF('dlgGrowl').show()");		
 	}
 	
 	/*Update das acoes OK/YES/NO.
@@ -260,7 +265,7 @@ public class DialogBean implements Serializable {
 	void update(){
 		if(this.update != null){
 			String[] updates = update.split(",");
-			List<String> listUpdates = new ArrayList<String>();
+			List<String> listUpdates = new ArrayList<>();
 			for(String str:updates){
 				listUpdates.add(str.trim());
 			}
@@ -270,15 +275,11 @@ public class DialogBean implements Serializable {
 	
 	//Metodo que define as SEVERITY das mensagens (subtipos)
 	void setHeaderAndMessageInDialogType(DialogType dialogType, String bundle){		
-		switch(dialogType){		
-			case INFO_CLOSABLE:
-				header=DialogUtil.getMessage("CGL110");
-				message = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle, null);
-				break;				
-				
+		
+		switch(dialogType){				
 			case INFO_NOT_CLOSABLE:	
 				closable = false;
-				header=DialogUtil.getMessage("CGL110");
+				header=DialogUtil.getMessage(MESSAGE_CGL110);
 				message = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle, null);
 				break;	
 				
@@ -296,15 +297,16 @@ public class DialogBean implements Serializable {
 				header=DialogUtil.getMessage("CGL108");
 				message = new FacesMessage(FacesMessage.SEVERITY_FATAL, bundle, null);	
 				break;
-				
-			case GROWL_INFO:
-				header=DialogUtil.getMessage("CGL110");
-				message = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle, null);
-				break;
-				
+											
 			case GROWL_ERROR:				
 				header=DialogUtil.getMessage("CGL166");
 				message = new FacesMessage(FacesMessage.SEVERITY_FATAL, bundle, null);		
+				break;
+				
+			default:
+				//INFO_CLOSABLE e GROWL_INFO:
+				header=DialogUtil.getMessage(MESSAGE_CGL110);
+				message = new FacesMessage(FacesMessage.SEVERITY_INFO, bundle, null);
 				break;
 		}		
 	}
@@ -314,7 +316,7 @@ public class DialogBean implements Serializable {
 	void putObjectInSession(String key, Object value){		
 
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().
-				getExternalContext().getSession(true); 
+				getExternalContext().getSession(false); 
 		
         session.setAttribute(key, value); 
 	}
@@ -324,9 +326,9 @@ public class DialogBean implements Serializable {
 	void removeObjectTheSession(String key){		
 
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().
-				getExternalContext().getSession(true);
+				getExternalContext().getSession(false);
 		
-        session.removeAttribute(key);        
+       session.removeAttribute(key);        
 	}
 	
 	/*recuperar um objeto da sessao
@@ -334,7 +336,7 @@ public class DialogBean implements Serializable {
 	Object getObjectFromSession(String key){		
 
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().
-				getExternalContext().getSession(true); 
+				getExternalContext().getSession(false); 
 		
         Object value = session.getAttribute(key);        
         session.removeAttribute(key);        

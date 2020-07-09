@@ -3,10 +3,17 @@ package br.eti.amazu.infra.view.bean;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.PostConstruct;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.event.ValueChangeEvent;
 import javax.inject.Named;
+
+import org.apache.log4j.Level;
+
 import br.eti.amazu.infra.util.FacesUtil;
+import br.eti.amazu.infra.util.log.Ansi;
+import br.eti.amazu.infra.util.log.Log;
 import br.eti.amazu.infra.view.vo.Config;
 import br.eti.amazu.infra.view.vo.Theme;
 import lombok.Getter;
@@ -21,7 +28,7 @@ public class ConfigBean implements Serializable {
 	private static final long serialVersionUID = -6663659948453061860L;
 	
 	//O objeto config contem as variaveis de configuracoes do sistema.
-	private Config config;
+	private transient Config config;
 	private String skinTheme;
 	
 	//Armazena uma lista de idiomas suportados.
@@ -30,6 +37,27 @@ public class ConfigBean implements Serializable {
 	//-------themes--------------------
 	private Theme theme;
 	private List<Theme> themes;
+			
+	@PostConstruct
+	public void initLocales() {
+		
+		//Utliza a classe FacesUtil para obter a lista de idiomas suportados.
+		locales = new FacesUtil().getLocales();
+		
+		//realiza apenas um log
+		StringBuilder strb = new StringBuilder();
+		strb.append("Linguagens suportadas: ");
+		int i = 1;
+		for (String str : locales) {
+			if (i == locales.size()) {
+				strb.append(str);
+			} else {
+				strb.append(str + ", ");
+			}
+			i++;
+		}
+		Log.setLogger(ConfigBean.class, strb.toString(), Level.INFO, Ansi.GREEN);		
+	}
 
 	//-------------------------------------
 	public void setConfiguracoes() {
@@ -50,7 +78,7 @@ public class ConfigBean implements Serializable {
 		config.setSkinImageLogo("amazuLogo.gif"); // ......Imagem logotipo da empresa.
 		config.setSkinLogo("T"); // .....................................Topo - logotipo da empresa.
 		config.setSkinTextLogo("Tecnologia Java"); // .......Texto abaixo do logotipo.
-		config.setSkinColorTextLogo("13f02d"); // ............A cor do texto do logotipo;
+		config.setSkinColorTextLogo("13f02d"); // ............A cor do texto do logotipo
 		config.setSkinAnimatedHtml("blankapp_topo_anime.xhtml"); // .O Html5 anim
 		
 		//Isto eh o que serah escrito no rodapeh da pagina.
@@ -67,10 +95,10 @@ public class ConfigBean implements Serializable {
 		config.setSkinTheme(skinTheme);
 		/* ========================================= */
 		
-		//logs
-		System.out.println("Rodando o tema: " + config.getSkinTheme());
-		System.out.println("Rodando o skin: " + config.getSkinBackground());
-		System.out.println("Rodando o menu: " + config.getMenuType());
+		//logs		
+		Log.setLogger(ConfigBean.class, "Rodando o tema: " + config.getSkinTheme(), Level.INFO);
+		Log.setLogger(ConfigBean.class, "Rodando o skin: " + config.getSkinBackground(), Level.INFO);
+		Log.setLogger(ConfigBean.class, "Rodando o menu: " + config.getMenuType(), Level.INFO);
 	}
 
 	public void saveTheme(ValueChangeEvent e) {
@@ -88,29 +116,5 @@ public class ConfigBean implements Serializable {
 			this.setConfiguracoes();
 		}
 		return config;
-	}
-
-	public List<String> getLocales() {
-		
-		//Utliza a classe FacesUtil para obter a lista de idiomas suportados.
-		if (locales.isEmpty()) {
-			locales = FacesUtil.getLocales();
-			
-			//realiza apenas um log
-			StringBuffer strb = new StringBuffer();
-			strb.append("Linguagens suportadas: ");
-			int i = 1;
-			for (String str : locales) {
-				if (i == locales.size()) {
-					strb.append(str);
-				} else {
-					strb.append(str + ", ");
-				}
-				i++;
-			}
-			System.out.println(strb.toString());
-		}
-		return locales;
-	}
-	
+	}	
 }

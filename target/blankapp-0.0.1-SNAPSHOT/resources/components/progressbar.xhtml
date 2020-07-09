@@ -1,73 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml"
+<html lang="en" xml:lang="en"
+	xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:p="http://primefaces.org/ui">
 
-<cc:interface>
-	<cc:attribute name="widgetVar" type="java.lang.String" />
-</cc:interface>
+ 	<head>
+  		<title></title>
+	</head>
 
-<cc:implementation>
-
-	<p:dialog id="progressbar" widgetVar="#{cc.attrs.widgetVar}"
-		modal="true" appendTo="@(body)" resizable="false" draggable="true"
-		width="400" styleClass="center" height="160" closable="false">
-
-		<f:facet name="header">
-			<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
-				<p:spacer height="16" />
-
-				<p:ajaxStatus id="status">
-					<f:facet name="start">
-						<h:outputText value="#{msg.CGL005}" />
-					</f:facet>
-					<f:facet name="complete">
-						<p:spacer height="16" />
-					</f:facet>
-				</p:ajaxStatus>
-
-			</h:panelGrid>
-		</f:facet>
-
-		<h:form id="formProgress">
-			<br />
-			<p:commandButton value="#{msg.CGL043}"
-				action="#{progressBean.onStart}"
-				onclick="PF('pbAjax').start();PF('startButton').disable();"
-				update="formProgress" widgetVar="startButton" />
-
-			<p:commandButton value="#{msg.CGL014}" async="true"
-				action="#{progressBean.onCancel}"
-				onclick="PF('pbAjax').cancel();PF('#{cc.attrs.widgetVar}')
-    								.hide();PF('startButton').enable();"
-				update="progress" widgetVar="cancelButton" />
-
-			<br />
-			<br />
-
-			<p:progressBar id="progress" labelTemplate="{value}%" interval="500"
-				widgetVar="pbAjax" ajax="true" value="#{progressBean.progress}">
-				<p:ajax update="formProgress:progress" event="complete"
-					listener="#{progressBean.onComplete}"
-					onsuccess="PF('#{cc.attrs.widgetVar}')
-			        		.hide();PF('startButton').enable();" />
-			</p:progressBar>
-
-			<p:outputPanel>
-				<p:autoUpdate />
-				<div style="margin-top: 7px; text-align: left;">
-					<h:outputText escape="true" style="text-align:left;"
-						value="#{progressBean.status}" />
-				</div>
-			</p:outputPanel>
-
-			<br />
-		</h:form>
-	</p:dialog>
-</cc:implementation>
+	<cc:interface>
+		<cc:attribute name="widgetVar" type="java.lang.String" />
+	</cc:interface>
+	
+	<cc:implementation>
+	
+		<p:dialog id="progressbar" widgetVar="#{cc.attrs.widgetVar}"
+			modal="true" appendTo="@(body)" resizable="false" draggable="true"
+			width="400" styleClass="center" height="160" closable="false">
+	
+			<f:facet name="header">
+				<h:panelGrid columns="2" cellpadding="0" cellspacing="0">
+					<p:spacer height="16" />
+	
+					<p:ajaxStatus id="status">
+						<f:facet name="start">
+							<h:outputText value="#{msg.CGL005}" />
+						</f:facet>
+						<f:facet name="complete">
+							<p:spacer height="16" />
+						</f:facet>
+					</p:ajaxStatus>
+	
+				</h:panelGrid>
+			</f:facet>
+	
+			<h:form id="formProgress">
+				<br />
+				<p:commandButton value="#{msg.CGL043}"
+					action="#{progressBean.onStart}"
+					onclick="PF('pbAjax').start();PF('startButton').disable();"
+					update="formProgress" widgetVar="startButton" />
+	
+				<p:commandButton value="#{msg.CGL014}" async="true"
+					action="#{progressBean.onCancel}"
+					onclick="PF('pbAjax').cancel();PF('#{cc.attrs.widgetVar}')
+	    								.hide();PF('startButton').enable();"
+					update="progress" widgetVar="cancelButton" />
+	
+				<br />
+				<br />
+	
+				<p:progressBar id="progress" labelTemplate="{value}%" interval="500"
+					widgetVar="pbAjax" ajax="true" value="#{progressBean.progress}">
+					<p:ajax update="formProgress:progress" event="complete"
+						listener="#{progressBean.onComplete}"
+						onsuccess="PF('#{cc.attrs.widgetVar}')
+				        		.hide();PF('startButton').enable();" />
+				</p:progressBar>
+	
+				<p:outputPanel>
+					<p:autoUpdate />
+					<div style="margin-top: 7px; text-align: left;">
+						<h:outputText escape="true" style="text-align:left;"
+							value="#{progressBean.status}" />
+					</div>
+				</p:outputPanel>
+	
+				<br />
+			</h:form>
+		</p:dialog>
+	</cc:implementation>
 </html>

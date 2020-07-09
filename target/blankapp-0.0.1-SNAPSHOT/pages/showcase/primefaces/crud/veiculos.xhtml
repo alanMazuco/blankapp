@@ -10,35 +10,36 @@
     
 	<ui:define name="content">
     
-		<h:form id="formListaVeiculos">        
-		   			   		
-		  <p:commandButton icon="pi pi-plus-circle" styleClass="imgButton" 
-		   		action="#{crudCaseBean.novoVeiculo}" title="Incluir"/>   	
-		  <br/><br/>
-		   	    	   	   			
+		<h:form id="formListaVeiculos"> 		   			   		
+			<p:commandButton icon="pi pi-plus-circle" styleClass="imgButton" 
+			   		action="#{crudCaseBean.novoVeiculo}" title="Incluir"/>   	
+			<br/><br/>
+			   	    	   	   			
 			<p:dataTable id="tableVeiculos" var="veiculo" value="#{crudCaseBean.listaVeiculos}" 
-				emptyMessage="Nenhum veículo cadastrado." style="width:500px;text-align:center;">
-			            
+					emptyMessage="Nenhum veículo cadastrado." style="width:500px;text-align:center;">
+				            
 				<f:facet name="header">Veículos cadastrados</f:facet>
-		       	
-		   <p:column headerText="Marca">#{veiculo.marca}</p:column>	            
-				<p:column headerText="Modelo">#{veiculo.modelo}</p:column>				
-				<p:column headerText="Cor">#{veiculo.cor}</p:column>			
-				<p:column headerText="Ano">#{veiculo.ano}</p:column>
-					
-				<p:column headerText="Ações">								
-					<p:commandButton icon="pi pi-trash" styleClass="imgButton"
-						title="Excluir" action="#{crudCaseBean.confirmarExclusao(veiculo)}">					
-					</p:commandButton>
-														
-					<p:commandButton title="Alterar" icon="pi pi-pencil" styleClass="imgButton"  
-						action="#{crudCaseBean.editarVeiculo(veiculo)}">					
-					</p:commandButton>
+			       	
+			   	<p:column headerText="Marca">#{veiculo.marca}</p:column>	            
+					<p:column headerText="Modelo">#{veiculo.modelo}</p:column>				
+					<p:column headerText="Cor">#{veiculo.cor}</p:column>			
+					<p:column headerText="Ano">#{veiculo.ano}</p:column>
+						
+					<p:column headerText="Ações">								
+						<p:commandButton icon="pi pi-trash" styleClass="imgButton"
+							title="Excluir" action="#{crudCaseBean.confirmarExclusao(veiculo)}">					
+						</p:commandButton>
+															
+						<p:commandButton title="Alterar" icon="pi pi-pencil" styleClass="imgButton"  
+							action="#{crudCaseBean.editarVeiculo(veiculo)}">					
+						</p:commandButton>
 				</p:column>
 			</p:dataTable>
-					
-			<a:status/>
-					
+			
+				
+				<a:status/>
+			
+						
 			<p:commandButton value="Show Case"  action="/pages/showcase/homeShowCase"/>
 			<br/><br/>	
 		</h:form>	

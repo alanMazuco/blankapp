@@ -14,7 +14,7 @@
 								rendered="#{not empty configBean.locales}" 	style="width:200px;">
 		
 		<p:column headerText="#{msg.CGL142}">
-			<div align="left">							
+			<div style="text-align: left">							
 				<p:commandLink ajax="false" value="#{locale}"  
 						action="#{userSessionInBean.mudarIdioma}">						
 				  	<f:param name="locale" value="#{locale}"/>			  

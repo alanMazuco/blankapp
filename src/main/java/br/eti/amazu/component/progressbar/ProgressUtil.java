@@ -7,6 +7,10 @@ import javax.faces.context.FacesContext;
 
 public class ProgressUtil {
 	
+	private ProgressUtil() {
+		//do not compliance
+	}
+	
 	/* MENSAGENS SEM PARAMETROS
 	 * Utilizado intensivamente no processo de internacionalizacao. 
 	 * Obtem o valor da mensagem do arquivo properties, passando a chave como parametro.	
@@ -29,11 +33,9 @@ public class ProgressUtil {
 	public static MethodExpression getMethodExpression(String action) {
 		FacesContext ctx = FacesContext.getCurrentInstance();				
 		
-		MethodExpression methodExpression = FacesContext.getCurrentInstance().getApplication()
+		return FacesContext.getCurrentInstance().getApplication()
 			.getExpressionFactory().createMethodExpression(ctx.getELContext(), action, 
 					String.class, new Class[0]);		
-		
-		return methodExpression;
 	}
 
 }

@@ -1,12 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="en" xml:lang="en"
+	xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"    
 	xmlns:h="http://java.sun.com/jsf/html"
  	xmlns:f="http://java.sun.com/jsf/core"    
  	xmlns:p="http://primefaces.org/ui">
+    
+    <head>
+  		<title></title>
+	</head>
     
 	<cc:interface></cc:interface>
       
@@ -27,10 +32,10 @@
 						
 						<p:panel style="width:200px;text-align:center;" 
 							rendered="#{dialogBean.confirmWarn == true?'true':'false'}">
-					   <h:outputText value="#{msg.CGL165}"
-					     style="color:red;font-weight:bold;text-align:center;font-size:15px !important;"/>
-					     <p:effect type="shake" event="load" />
-					 </p:panel>
+							<h:outputText value="#{msg.CGL165}"
+								style="color:red;font-weight:bold;text-align:center;font-size:15px !important;"/>
+						    <p:effect type="shake" event="load" />
+						</p:panel>
 							
 						<div style="text-align:left">		
 							<p:messages/>
@@ -53,9 +58,9 @@
 									action="#{dialogBean.actionOkYes}" ajax="#{dialogBean.ajax}" 
 									value="OK" update="#{dialogBean.update}"/>									    		
 								</div>
-
 							</div>				    					    	
-						</p:outputPanel>					
+						</p:outputPanel>
+											
 						<p:spacer height="10"/>
 					</p:dialog>
 					

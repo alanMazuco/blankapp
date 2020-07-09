@@ -38,20 +38,17 @@ public enum Ansi {
 	BLACK_BOLD ("\u001B[1;30m"), //.................preto negrito
 	BLACK_YELLOWBG  ("\u001B[1;2;103;90m"); //......preto fundo amarelo
 
-	private String ansi;	
+	private String ansiStr;	
 	
-	Ansi(String ansi) {
-		this.ansi = ansi;		
+	Ansi(String ansiStr) {
+		this.ansiStr = ansiStr;		
 	}
 
 	/*--------
 	 * get/set
 	 ---------*/
-	public String getAnsi() {
-		return ansi;
-	}
-	public void setAnsi(String ansi) {
-		this.ansi = ansi;
+	public String getAnsiStr() {
+		return ansiStr;
 	}
 	
 }

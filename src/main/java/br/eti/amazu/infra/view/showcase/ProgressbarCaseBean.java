@@ -3,16 +3,22 @@ package br.eti.amazu.infra.view.showcase;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.apache.log4j.Level;
+
 import br.eti.amazu.component.progressbar.ProgressBean;
 import br.eti.amazu.infra.util.FacesUtil;
+import br.eti.amazu.infra.util.log.Log;
+import lombok.Setter;
 
 
 @Named
 @RequestScoped
+@Setter
 public class ProgressbarCaseBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -34,9 +40,9 @@ public class ProgressbarCaseBean implements Serializable {
 		while (i<=a){ //enquanto o index for menor que o tamanho...		
 	
 			if (progressBean.isCancelou()){ //enquanto o usuário não cancelar...
-				System.out.println("Interrompeu o processo!");				
-				List<String> resultado = new ArrayList<String>();
-				resultado.add(FacesUtil.getMessage("MGL063"));
+				Log.setLogger(ProgressBean.class, "Interrompeu o processo!", Level.INFO);
+				List<String> resultado = new ArrayList<>();
+				resultado.add(new FacesUtil().getMessage("MGL063"));
 				progressBean.setResultado(resultado);				
 				return;
 			}
@@ -53,6 +59,7 @@ public class ProgressbarCaseBean implements Serializable {
 		long t0 = System.currentTimeMillis();
 
 		while (System.currentTimeMillis() - t0 < timeMilisseconds) {
+			//do not compliance
 		}
 
 	}	

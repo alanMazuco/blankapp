@@ -4,11 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.log4j.Level;
+import org.omnifaces.cdi.ViewScoped;
 
 import br.eti.amazu.component.dialog.DialogBean;
 import br.eti.amazu.component.dialog.DialogType;
@@ -27,13 +27,13 @@ import lombok.Setter;
 public class MessageCaseBean implements Serializable{
 
 	private static final long serialVersionUID = 1L;	
-	private Veiculo veiculo = new Veiculo();	
+	private transient Veiculo veiculo = new Veiculo();	
 	private String txtHello = "Hello Messages";
 	private int contador = 0;
 	
 	@Inject
 	DialogBean dialogBean;
-	
+			
 	public void testarInfoClosable(){ //INFO_CLOSABLE	
 		dialogBean.addMessage(DialogUtil.getMessage("MPF003"), DialogType.INFO_CLOSABLE);
 	}	
@@ -81,18 +81,19 @@ public class MessageCaseBean implements Serializable{
 						"messageCaseBean.printarRetornoBotaoNo", null);
 	}
 	
-	public void printarErro(){ //Printar Erro - ERROR - no bloco try-catch
+	public Integer printarErro(){ //Printar Erro - ERROR - no bloco try-catch
+		
 		try{			
-			@SuppressWarnings("unused")
-			int a = 1/0;		
+			throw new ArithmeticException("Divisão por zero não permitida.");
 			
 		}catch (Exception e){
 			dialogBean.addMessage(e.getMessage(), DialogType.ERROR);
 		}
-	}
+		return null;
+	}	
 	
 	public void testarMsgParametrizadas(){ //INFO_CLOSABLE - com parametros
-		String params[] = new String[]{veiculo.getMarca(),veiculo.getModelo(), 
+		String[] params = new String[]{veiculo.getMarca(),veiculo.getModelo(), 
 				veiculo.getCor(),veiculo.getAno()};	
 		
 		dialogBean.addMessage(DialogUtil.getMessage("MPF005", params), 
@@ -106,7 +107,7 @@ public class MessageCaseBean implements Serializable{
 	}
 	
 	public void testarMsgComLista(){ //INFO_CLOSABLE com lista
-		List<String> lista = new ArrayList<String>();		
+		List<String> lista = new ArrayList<>();		
 		lista.add(DialogUtil.getMessage("MPF011"));
 		lista.add(DialogUtil.getMessage("MPF012"));
 		lista.add(DialogUtil.getMessage("MPF013"));	
@@ -115,7 +116,7 @@ public class MessageCaseBean implements Serializable{
 	}
 	
 	public void testarActionMessageWarnVarianteComLista(){ //ACTION MESSAGE + WARN + lista
-		List<String> lista = new ArrayList<String>();		
+		List<String> lista = new ArrayList<>();		
 		lista.add(DialogUtil.getMessage("MPF011"));
 		lista.add(DialogUtil.getMessage("MPF012"));
 		lista.add(DialogUtil.getMessage("MPF013"));		
@@ -139,24 +140,25 @@ public class MessageCaseBean implements Serializable{
 	
 	//Metodos usados para testar os botoes...
 	public void printarRetornoBotaoOk(){
-		System.out.println(DialogUtil.getMessage("MPF008"));
+		Log.setLogger(this.getClass(), DialogUtil.getMessage("MPF008"), Level.INFO);
 	}	
 	
 	public void printarRetornoBotaoYes(){
-		System.out.println(DialogUtil.getMessage("MPF009"));
+		Log.setLogger(this.getClass(), DialogUtil.getMessage("MPF009"), Level.INFO);
 	}	
 	
 	public void printarRetornoBotaoNo(){
-		System.out.println(DialogUtil.getMessage("MPF010"));
+		Log.setLogger(this.getClass(), DialogUtil.getMessage("MPF010"), Level.INFO);
 	}
 	
 	//metodo usado para testar o redirect.
 	public void retornarHomeShowCase(){
-		System.out.println("...faz alguma coisa e redireciona.");
-		FacesUtil.redirect("/pages/showcase/homeShowCase");
+		Log.setLogger(this.getClass(), "...faz alguma coisa e redireciona.", Level.INFO);
+		new FacesUtil().redirect("/pages/showcase/homeShowCase");
 	}
 
-	public void testarLogs(){		
+	public void testarLogs(){	
+		
 		Log.setLogger(this.getClass(), "Printando Level TRACE", Level.TRACE);
 		Log.setLogger(this.getClass(), "Isto é um log com Level DEBUG", Level.DEBUG);		
 		Log.setLogger(this.getClass(), "Imprimindo Level INFO", Level.INFO);

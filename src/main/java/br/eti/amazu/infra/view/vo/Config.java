@@ -32,7 +32,7 @@ public class Config {
 	private String skinAnimatedHtml;
 	
 	public Config() {
-		
+		//do not compliance
 	}
 	
 }

@@ -23,20 +23,16 @@ public class ObjectConverter implements Converter<Object> {
 	public String getAsString(FacesContext ctx, UIComponent component,
             Object value) {
  
-        if (value != null && ! "".equals(value)) {
-          @SuppressWarnings("unchecked")
-							AbstractEntity<Long> entity = (AbstractEntity<Long>) value;
+		if (value != null && ! "".equals(value)) {
+			@SuppressWarnings("unchecked")
+			AbstractEntity<Long> entity = (AbstractEntity<Long>) value;
  
-            if (entity.getId() != null) {
-                this.addAttribute(component, entity);
- 
-                if (entity.getId() != null) {
-                    return String.valueOf(entity.getId());
-                }
-                return (String) value;
-            }
+			if (entity.getId() != null) {
+				this.addAttribute(component, entity);
+       		  	return String.valueOf(entity.getId());
+			}
         }
-        return "";
+		return "";
     }
  
     private void addAttribute(UIComponent component, AbstractEntity<Long> o) {

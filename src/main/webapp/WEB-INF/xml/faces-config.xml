@@ -16,13 +16,5 @@
 			<supported-locale>en_US</supported-locale>
     	</locale-config>
     </application> 
-    
-    <!-- 
-   	<lifecycle>
-		<phase-listener>    		      
-      		br.eti.amazu.infra.view.showcase.listener.PhaseTracker
-		</phase-listener>
-    </lifecycle>
-	 -->
-	 
+    	 
 </faces-config>

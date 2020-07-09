@@ -1,12 +1,17 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html xmlns="http://www.w3.org/1999/xhtml" 
+<html lang="en" xml:lang="en"
+	xmlns="http://www.w3.org/1999/xhtml" 
 	xmlns:cc="http://java.sun.com/jsf/composite"
 	xmlns:ui="http://java.sun.com/jsf/facelets"    
 	xmlns:h="http://java.sun.com/jsf/html"
   	xmlns:f="http://java.sun.com/jsf/core"    
    	xmlns:p="http://primefaces.org/ui">
+    
+	<head>
+  		<title></title>
+	</head>
     
 	<cc:interface></cc:interface>      
 	<cc:implementation>	
@@ -31,7 +36,7 @@
 								style="color:red;font-weight:bold;text-align:center;
 									font-size:15px !important;"/>
 					        <p:effect type="shake" event="load" />
-					 </p:panel>
+					 	</p:panel>
 									    	
 						<h:panelGrid width="100%">
 							<p:spacer height="5"/>				    	
@@ -65,7 +70,8 @@
 										onclick="PF('dlgConfirm').hide()" 
 										action="#{dialogBean.actionOkYes}"
 										value="#{msg.CGL070}" update="#{dialogBean.update}"
-										widgetVar="btnOkYes" />							    		
+										widgetVar="btnOkYes" />
+																    		
 									<p:commandButton action="#{dialogBean.actionNo}" id="btnNoConfirm"  
 										oncclick="PF('dlgConfirm').hide()" 	value="#{msg.CGL055}"/>	    		
 								</div>

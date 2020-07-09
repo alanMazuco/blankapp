@@ -9,7 +9,7 @@
 
 	<ui:define name="content">
 		<h:form id="formValues">
-			<p:panel header="VALORES PARA TESTE" style="width:60%;"
+			<p:panel header="VALORES PARA TESTE" style="width:100%;display:inline-block;"
 				footer="Testando entradas com Ajax">
 				<br />
 				<p:panelGrid columns="2" style="width:100%;" columnClasses="top10,top90">
@@ -63,7 +63,7 @@
 						<h:outputLabel value="Money:" />
 						<h:inputText label="Money"
 							value="#{convValidatorCaseBean.valueTest.moeda}"
-							onkeypress="mascara(this,moeda);">
+							onkeypress="$(this).mask('###.###.###.##0,00', {reverse: true});">
 							<f:convertNumber pattern="###,##0.00" />
 						</h:inputText>
 						<h:outputText value="#{convValidatorCaseBean.valueTest.moeda}" />
@@ -104,15 +104,15 @@
 
 						<h:outputLabel value="CPF:" />
 						<h:inputText label="CPF" value="#{convValidatorCaseBean.valueTest.cpf}"							
-							onkeypress="mascara(this,cpf)" maxlength="14">
-							<f:validator validatorId="cpfValidator" />
+							onkeypress="$(this).mask('000.000.000-00');" maxlength="14">
+							
 						</h:inputText>
 						<h:outputText value="#{convValidatorCaseBean.valueTest.cpf}" />
 
 						<h:outputLabel value="CNPJ:" />
 						<h:inputText label="CNPJ" value="#{convValidatorCaseBean.valueTest.cnpj}"							
-							onkeypress="mascara(this,cnpj)" maxlength="18">
-							<f:validator validatorId="cnpjValidator" />
+							onkeypress="$(this).mask('00.000.000/0000-00')" maxlength="18">
+							
 						</h:inputText>
 						<h:outputText value="#{convValidatorCaseBean.valueTest.cnpj}" />
 						<h:outputLabel value="Phone:" />

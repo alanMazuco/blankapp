@@ -27,8 +27,4 @@ public enum DialogType {
 		return dialog;
 	}
 
-	public void setDialog(String dialog) {
-		this.dialog = dialog;
-	}	
-
 }

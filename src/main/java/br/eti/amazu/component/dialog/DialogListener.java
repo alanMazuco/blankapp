@@ -4,17 +4,23 @@ import javax.faces.event.PhaseEvent;
 import javax.faces.event.PhaseId;
 import javax.faces.event.PhaseListener;
 import javax.inject.Inject;
+import javax.inject.Named;
+
 import org.primefaces.PrimeFaces;
 
+import br.eti.amazu.infra.util.FacesUtil;
+
+@Named
 public class DialogListener implements PhaseListener {		
 	
 	private static final long serialVersionUID = 1L;
 	
 	@Inject
 	DialogBean dialogBean;
-	
-	public void afterPhase(PhaseEvent event) {				
-		String severity = DialogUtil.getSeverity(); 
+				
+	public void afterPhase(PhaseEvent event) {			
+		
+		String severity = new FacesUtil().getSeverity(); 
 					
 		if(event.getPhaseId() == PhaseId.RENDER_RESPONSE) {
 			dialogBean.getLista().clear();
@@ -29,17 +35,14 @@ public class DialogListener implements PhaseListener {
 				dialogBean.setActionButtonNo(null);								
 				dialogBean.setClosable(true);
 				dialogBean.setTipoDialog("ERROR");								
-				dialogBean.setHeader(DialogUtil.getMessage("CGL107"));	
-				
-				PrimeFaces pf = PrimeFaces.current();
-				if (pf.isAjaxRequest()) {					
-					pf.executeScript("PF('dlg').show()");	
-				}
-
+				dialogBean.setHeader(DialogUtil.getMessage("CGL107"));
+				PrimeFaces.current().executeScript("PF('dlg').show()");	
 			}
 		}		
 	}	
-	public void beforePhase(PhaseEvent event) {}
+	public void beforePhase(PhaseEvent event) {
+		//not compliance
+	}
 	
 	public PhaseId getPhaseId() {
 		return PhaseId.ANY_PHASE;
